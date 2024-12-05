@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "2988431397",
+    "firebase_url": "https://hackverseuserdata-default-rtdb.firebaseio.com",
+    "project_id": "hackverseuserdata",
+    "storage_bucket": "hackverseuserdata.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2988431397:android:a65f2f7b9a5273764b47cc",
+        "android_client_info": {
+          "package_name": "com.example.hackverse"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWb51gYbLc_4Qd7LBHTu_a5XE-Vxko3qk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2988431397:android:33a12b94af281fb04b47cc",
+        "android_client_info": {
+          "package_name": "com.example.signin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWb51gYbLc_4Qd7LBHTu_a5XE-Vxko3qk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
