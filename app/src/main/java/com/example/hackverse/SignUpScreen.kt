@@ -41,17 +41,33 @@ class SignUpScreen : AppCompatActivity() {
             val pass = passUser.text.toString()
             val userid = useridUser.text.toString()
 
-            val user = User(name,email,pass,userid)
-            database = FirebaseDatabase.getInstance().getReference("Users")
-            database.child(userid).setValue(user).addOnSuccessListener {
-                Toast.makeText(this,"Account Created ",Toast.LENGTH_SHORT).show()
-                val intentToMain1 = Intent(this,MainScreen1::class.java )
-                startActivity(intentToMain1)
-            }.addOnFailureListener{
-                Toast.makeText(this,"Account Creation failed ",Toast.LENGTH_SHORT).show()
+            // confirm that all is filled
+            if (name.isNotEmpty()&&email.isNotEmpty()&&pass.isNotEmpty()&&userid.isNotEmpty()) {
+
+                //obtain data
+                val user = User(name, email, pass, userid)
+                database = FirebaseDatabase.getInstance().getReference("Users")
+                database.child(userid,).get().addOnSuccessListener {
+                    if (it.exists()) {
+                        Toast.makeText(this, "User Id must be Unique Already exits", Toast.LENGTH_SHORT).show()
+                    } else {
+                        // writing the data into firebase database
+                        database.child(userid).setValue(user).addOnSuccessListener {
+                            Toast.makeText(this, "Account Created ", Toast.LENGTH_SHORT).show()
+
+                            //navigating to mainscreen 1 when account created
+                            val intentToMain1 = Intent(this, MainScreen1::class.java)
+                            startActivity(intentToMain1)
+
+                        }.addOnFailureListener {
+                            Toast.makeText(this, "Account Creation failed ", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
+                }
+            } else{
+                Toast.makeText(this,"Provide All Details",Toast.LENGTH_SHORT).show()
             }
-
-
         }
 
         val existingUser = findViewById<TextView>(R.id.tosignin)
@@ -59,9 +75,6 @@ class SignUpScreen : AppCompatActivity() {
             val intentExist = Intent(this,SignInScreen :: class.java)
             startActivity(intentExist)
         }
-
-
-
 
     }
 }

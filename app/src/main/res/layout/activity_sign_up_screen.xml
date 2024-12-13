@@ -9,14 +9,13 @@
 
 
     <ImageView
-        android:layout_width="354dp"
-        android:layout_height="321dp"
+        android:layout_width="226dp"
+        android:layout_height="199dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.446"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.101"
+        app:layout_constraintVertical_bias="0.186"
         app:srcCompat="@drawable/logohackverse" />
 
     <TextView
@@ -88,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/baseline_email_24"
                 android:drawablePadding="5dp"
-                android:hint="Emial" />
+                android:hint="Email" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout

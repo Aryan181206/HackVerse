@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this,SignUpScreen::class.java)
             startActivity(intent)
             finish()
-        },500)
+
+        },5000)
     }
 }

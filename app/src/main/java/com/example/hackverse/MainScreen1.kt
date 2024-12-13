@@ -23,6 +23,5 @@ class MainScreen1 : AppCompatActivity() {
             insets
         }
 
-        binding.textView2.setOnClickListener {  }
     }
 }
