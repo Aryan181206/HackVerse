@@ -3,6 +3,8 @@ package com.example.hackverse
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -22,6 +24,37 @@ class MainScreen1 : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
+
+
+        // obtaining some profile data
+        val shownamedata = intent.getStringExtra((SignInScreen.KEY1))
+        val showuseriddata = intent.getStringExtra((SignInScreen.KEY2))
+        val showemaildata = intent.getStringExtra((SignInScreen.KEY3))
+
+
+
+
+        val dashboardfragment =Dashboard()
+        val bundle = Bundle()
+        bundle.putString("name","aryansharma")
+        bundle.putString("userid","avtaar")
+
+        dashboardfragment.arguments = bundle
+
+
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.frame_layout, dashboardfragment) // Replace with your container ID
+            .commit()
+
+
+
+
+
+
+
 
         val bottomNavigationbar = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationbar.selectedItemId = R.id.Dashboard

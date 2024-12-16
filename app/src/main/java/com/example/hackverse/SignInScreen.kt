@@ -74,13 +74,6 @@ class SignInScreen : AppCompatActivity() {
                     intentMainScreen1.putExtra(KEY3,emailId)
                     startActivity(intentMainScreen1)
 
-                    val fragment = Dashboard()
-                    val bundle = Bundle()
-                    bundle.putString("name" ,nameId)
-                    fragment.arguments = bundle
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.frame_layout, Dashboard()) // Use your container ID
-                        .commit()
 
                     } else{
                     Toast.makeText(this,"Incorrect Password",Toast.LENGTH_SHORT).show()

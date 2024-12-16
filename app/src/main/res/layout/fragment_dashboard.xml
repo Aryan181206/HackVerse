@@ -98,6 +98,8 @@
                     android:layout_marginTop="8dp"
                     android:textColor="@color/darkishBlue"
                     android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:text="551165"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/imageView"
                     app:layout_constraintHorizontal_bias="0.765"

@@ -1,6 +1,7 @@
 package com.example.hackverse
 
 import android.os.Bundle
+import android.service.autofill.UserData
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +11,27 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hackverse.SignInScreen.Companion.KEY1
 import com.example.hackverse.SignInScreen.Companion.KEY2
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+
+
+
 
 
 class Dashboard : Fragment() {
+
+    data class UserData(
+        val name: String = "",
+        val userid: String = ""
+    )
+
+
+    // Firebase Database reference
+    private lateinit var database: FirebaseDatabase
+    private lateinit var userRef: DatabaseReference
 
 
 
@@ -21,9 +39,9 @@ class Dashboard : Fragment() {
     private lateinit var adapter: DashboardRV1Adapter
     private lateinit var dataList: List<hackathinviewdata>
 
+    lateinit var showname : TextView
+    lateinit var showuserid : TextView
 
-    lateinit var showname: TextView
-    lateinit var showuserId: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,15 +58,21 @@ class Dashboard : Fragment() {
         // Inflate the layout for this fragment
         val view = (inflater.inflate(R.layout.fragment_dashboard, container, false))
 
-        showname = view.findViewById<TextView>(R.id.showname)
-        showuserId = view.findViewById<TextView>(R.id.showuserid)
-        val data = arguments
-        if (data != null) {
-            val nameshow= data.getString("name").toString()
-            showname.text = nameshow
 
-        }else
-            showname.text ="Aryan 9 Sharma"
+        showname = view.findViewById(R.id.showname)
+        showuserid =view.findViewById(R.id.showuserid)
+
+
+        val data = arguments
+        val name = data?.getString("name").toString()
+        val userId = data?.getString("userid").toString()
+
+        // Set the values to the TextViews
+        showname.text = name
+        showuserid.text = userId
+
+
+
 
 
 
@@ -72,17 +96,8 @@ class Dashboard : Fragment() {
 
 
 
-
-
-
-
-
-
-
-
-
         return view
     }
 
+    }
 
-}
