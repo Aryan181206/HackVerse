@@ -73,12 +73,21 @@ class SignInScreen : AppCompatActivity() {
                     intentMainScreen1.putExtra(KEY2,userId)
                     intentMainScreen1.putExtra(KEY3,emailId)
                     startActivity(intentMainScreen1)
-                }else{
+
+                    val fragment = Dashboard()
+                    val bundle = Bundle()
+                    bundle.putString("name" ,nameId)
+                    fragment.arguments = bundle
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.frame_layout, Dashboard()) // Use your container ID
+                        .commit()
+
+                    } else{
                     Toast.makeText(this,"Incorrect Password",Toast.LENGTH_SHORT).show()
                 }
             }else{
-                Toast.makeText(this,"User Does not Exist , Sign Up First ",Toast.LENGTH_SHORT).show()
-            }
+            Toast.makeText(this, "User Does not Exist , Sign Up First ", Toast.LENGTH_SHORT).show()
+        }
         }.addOnFailureListener{
             Toast.makeText(this,"Failed To read Data from the database ", Toast.LENGTH_SHORT).show()
         }

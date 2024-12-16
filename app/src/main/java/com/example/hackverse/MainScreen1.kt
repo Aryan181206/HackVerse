@@ -1,27 +1,52 @@
 package com.example.hackverse
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.hackverse.databinding.ActivityMainScreen1Binding
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainScreen1 : AppCompatActivity() {
-
-    lateinit var binding: ActivityMainScreen1Binding    //find view wale ko hatane wala code
-
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityMainScreen1Binding.inflate(layoutInflater)                 //find view wale ko hatane wala code
-        setContentView(binding.root)                                                 //find view wale ko hatane wala code
         setContentView(R.layout.activity_main_screen1)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val bottomNavigationbar = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        bottomNavigationbar.selectedItemId = R.id.Dashboard
+        replacewithfragemt(Dashboard())
+
+        bottomNavigationbar.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.Team -> replacewithfragemt(team())
+                R.id.Event -> replacewithfragemt(Event())
+                R.id.Dashboard -> replacewithfragemt(Dashboard())
+                R.id.Mentorship -> replacewithfragemt(Mentorship())
+                R.id.Profile -> replacewithfragemt(profile())
+                else -> {
+
+                }
+            }
+            true
+        }
+    }
+
+    private fun replacewithfragemt(fragment: Fragment) {
+        val fragmentmanager = supportFragmentManager
+        val fragmentTransition = fragmentmanager.beginTransaction()
+        fragmentTransition.replace(R.id.frame_layout, fragment)
+        fragmentTransition.commit()
 
     }
 }

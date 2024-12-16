@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:title="Team"
+        android:id="@+id/Team"
+        android:icon="@drawable/team"/>
+
+
+    <item android:title="Event"
+        android:id="@+id/Event"
+        android:icon="@drawable/hackathon"/>
+
+    <item android:title="Dashboard"
+        android:id="@+id/Dashboard"
+        android:icon="@drawable/ic_dashboard_black_24dp"/>
+
+    <item android:title="MentorShip"
+        android:id="@+id/Mentorship"
+        android:icon="@drawable/baseline_people_24"/>
+
+    <item android:title="Profile"
+        android:id="@+id/Profile"
+        android:icon="@drawable/profile2"/>
+
+</menu>
