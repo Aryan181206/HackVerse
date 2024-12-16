@@ -23,11 +23,6 @@ import com.google.firebase.database.ValueEventListener
 
 class Dashboard : Fragment() {
 
-    data class UserData(
-        val name: String = "",
-        val userid: String = ""
-    )
-
 
     // Firebase Database reference
     private lateinit var database: FirebaseDatabase
@@ -70,6 +65,9 @@ class Dashboard : Fragment() {
         // Set the values to the TextViews
         showname.text = name
         showuserid.text = userId
+
+
+
 
 
 

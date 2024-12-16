@@ -38,8 +38,8 @@ class MainScreen1 : AppCompatActivity() {
 
         val dashboardfragment =Dashboard()
         val bundle = Bundle()
-        bundle.putString("name","aryansharma")
-        bundle.putString("userid","avtaar")
+        bundle.putString("name",shownamedata.toString())
+        bundle.putString("userid",showuseriddata.toString())
 
         dashboardfragment.arguments = bundle
 
