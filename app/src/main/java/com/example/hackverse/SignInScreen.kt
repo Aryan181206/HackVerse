@@ -69,9 +69,9 @@ class SignInScreen : AppCompatActivity() {
 
                     // navigating to main screem 1 and passing data
                     val intentMainScreen1 = Intent(this,MainScreen1::class.java)
-                    intentMainScreen1.putExtra(KEY1,nameId)
-                    intentMainScreen1.putExtra(KEY2,userId)
-                    intentMainScreen1.putExtra(KEY3,emailId)
+                    intentMainScreen1.putExtra("name",nameId)
+                    intentMainScreen1.putExtra("userId",userId)
+                    intentMainScreen1.putExtra("emailId",emailId)
                     startActivity(intentMainScreen1)
 
 

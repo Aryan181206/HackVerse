@@ -57,6 +57,10 @@ class SignUpScreen : AppCompatActivity() {
 
                             //navigating to mainscreen 1 when account created
                             val intentToMain1 = Intent(this, MainScreen1::class.java)
+                            intentToMain1.putExtra("name",name)
+                            intentToMain1.putExtra("email",email)
+                            intentToMain1.putExtra("pass",pass)
+                            intentToMain1.putExtra("userid",userid)
                             startActivity(intentToMain1)
 
                         }.addOnFailureListener {

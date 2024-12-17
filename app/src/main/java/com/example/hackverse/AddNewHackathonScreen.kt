@@ -2,6 +2,7 @@ package com.example.hackverse
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -43,7 +44,6 @@ class AddNewHackathonScreen : AppCompatActivity() {
 
         // Get references to views
         val spinnerTeamSize: Spinner = findViewById(R.id.spinnerteamsize)
-        val btnteamsize: Button = findViewById(R.id.btnteamsize)
 
         //team size options
         val teamSizes = arrayOf("Select Team Size", "Single", "2", "3", "4", "5", "6")
@@ -75,21 +75,6 @@ class AddNewHackathonScreen : AppCompatActivity() {
 
 
         // Set the button click listener
-        btnteamsize.setOnClickListener {
-            // Get the selected item from the spinner
-            val selectedSize =
-                spinnerTeamSize.selectedItem.toString()  // data yaha par hai baad me yahi se lena hai
-
-
-            // Check if a valid team size is selected
-            if (selectedSize != "Select Team Size") {
-                Toast.makeText(this, "Data Submitted", Toast.LENGTH_SHORT).show()
-                // Perform further logic with the selected team size
-            } else {
-                Toast.makeText(this, "Provile all Details", Toast.LENGTH_SHORT).show()
-            }
-
-        }
 
         // Reference the Spinner by ID
         val spinnerMode: Spinner = findViewById(R.id.spinnerMode)
@@ -230,7 +215,7 @@ class AddNewHackathonScreen : AppCompatActivity() {
         // collecting the all data of added hackathon in a arrary list
 
         // Inside your onCreate method
-        val btn = findViewById<Button>(R.id.button)
+        val btn = findViewById<Button>(R.id.addhakathondata)
         btn.setOnClickListener {
             // Get the selected data only when the user clicks the button
             val HackathonTitle = findViewById<EditText>(R.id.HackathonTitle)
@@ -251,9 +236,6 @@ class AddNewHackathonScreen : AppCompatActivity() {
                 Toast.makeText(this, "Please provide all the details", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-
-
-
 
 
 
@@ -292,6 +274,9 @@ class AddNewHackathonScreen : AppCompatActivity() {
                 .add(HackathonData)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Hackathon Added successfully", Toast.LENGTH_SHORT).show()
+
+                    val intent = Intent (this , MainScreen1 :: class.java)
+                    startActivity(intent)
                 }
                 .addOnFailureListener {
                     Toast.makeText(this, "Some Error Occurred", Toast.LENGTH_SHORT).show()

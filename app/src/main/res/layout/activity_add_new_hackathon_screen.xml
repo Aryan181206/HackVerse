@@ -1,231 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddNewHackathonScreen">
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="254dp"
+        android:layout_width="match_parent"
         android:layout_height="62dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_gravity="center"
         app:srcCompat="@drawable/logohackverse" />
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:layout_marginTop="160dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="335dp"
-        android:layout_height="68dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
         android:gravity="center"
         android:text="Add New Hackathon"
         android:textColor="@color/purple"
         android:textSize="25dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        android:layout_margin="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Details"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="25dp"
+        android:textSize="20dp"/>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="389dp"
-        android:layout_height="681dp"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.101">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:elevation="20dp"
+        app:cardCornerRadius="15dp"
+     >
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="15dp">
+            android:layout_margin="15dp"
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/HackathonTitle"
-                android:layout_width="313dp"
-                android:layout_height="44dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="21dp"
-                android:layout_marginTop="18dp"
-                android:layout_marginEnd="23dp"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="7dp"
                 android:background="@drawable/spinner_border"
-                android:ems="10"
                 android:hint="Hackathon Title"
                 android:inputType="text"
                 android:padding="5dp"
-                android:textColorHint="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.506"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:textColorHint="@color/black" />
 
             <EditText
                 android:id="@+id/Organisation"
-                android:layout_width="313dp"
-                android:layout_height="46dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="21dp"
-                android:layout_marginTop="82dp"
-                android:layout_marginEnd="23dp"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="7dp"
                 android:background="@drawable/spinner_border"
-                android:ems="10"
                 android:hint="Organiser"
                 android:inputType="text"
                 android:padding="5dp"
-                android:textColorHint="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.506"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:textColorHint="@color/black" />
 
-            <EditText
-                android:id="@+id/description"
-                android:layout_width="313dp"
-                android:layout_height="46dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="21dp"
-                android:layout_marginTop="460dp"
-                android:layout_marginEnd="23dp"
-                android:background="@drawable/spinner_border"
-                android:ems="10"
-                android:hint="Description"
-                android:inputType="text"
-                android:padding="5dp"
-                android:textColorHint="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.506"
-                app:layout_constraintStart_toStartOf="parent" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editTextStartDate"
+                    android:layout_width="177dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginRight="7dp"
+                    android:layout_marginBottom="7dp"
+                    android:background="@drawable/spinner_border"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:gravity="left"
+                    android:hint="Start Date"
+                    android:padding="12dp"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/editTextEndDate"
+                    android:layout_width="177dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="203dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginEnd="7dp"
+                    android:layout_marginBottom="7dp"
+                    android:background="@drawable/spinner_border"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:gravity="left"
+                    android:hint="End Date"
+                    android:padding="12dp"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+            <Spinner
+                android:id="@+id/spinnerMode"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="7dp"
+                android:background="@drawable/spinner_border" />
+
 
             <Spinner
                 android:id="@+id/spinnerteamsize"
-                android:layout_width="313dp"
+                android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_below="@+id/Organisation"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="21dp"
-                android:layout_marginTop="17dp"
-                android:layout_marginEnd="23dp"
-                android:layout_marginBottom="461dp"
+                android:layout_margin="7dp"
                 android:background="@drawable/spinner_border" />
 
             <Spinner
                 android:id="@+id/spinnerReward"
-                android:layout_width="313dp"
-                android:layout_height="43dp"
-                android:layout_below="@+id/Organisation"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="21dp"
-                android:layout_marginTop="205dp"
-                android:layout_marginEnd="23dp"
-                android:layout_marginBottom="275dp"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="7dp"
                 android:background="@drawable/spinner_border" />
 
             <Spinner
                 android:id="@+id/spinnertype"
-                android:layout_width="313dp"
-                android:layout_height="44dp"
-                android:layout_below="@+id/Organisation"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="21dp"
-                android:layout_marginTop="267dp"
-                android:layout_marginEnd="23dp"
-                android:layout_marginBottom="212dp"
-                android:background="@drawable/spinner_border" />
-
-            <Spinner
-                android:id="@+id/spinnerMode"
-                android:layout_width="314dp"
+                android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_below="@+id/Organisation"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="79dp"
-                android:layout_marginEnd="23dp"
-                android:layout_marginBottom="399dp"
+                android:layout_margin="7dp"
                 android:background="@drawable/spinner_border" />
 
-
             <EditText
-                android:id="@+id/editTextStartDate"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/btnteamsize"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="187dp"
-                android:layout_marginBottom="253dp"
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="7dp"
                 android:background="@drawable/spinner_border"
-                android:clickable="true"
-                android:focusable="false"
-                android:hint="Start Date"
-                android:padding="12dp"
-                android:textSize="16sp" />
-
-            <EditText
-                android:id="@+id/editTextEndDate"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/btnteamsize"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="25dp"
-                android:layout_marginBottom="252dp"
-                android:background="@drawable/spinner_border"
-                android:clickable="true"
-                android:focusable="false"
-                android:hint="End Date"
-                android:padding="12dp"
-                android:textSize="16sp" />
+                android:hint="Description"
+                android:inputType="text"
+                android:padding="5dp"
+                android:textColorHint="@color/black" />
 
             <Button
-                android:id="@+id/btnteamsize"
-                android:layout_width="wrap_content"
-                android:layout_height="33dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginEnd="138dp"
-                android:layout_marginBottom="51dp"
-                android:text="Submit"
-                android:textSize="10dp" />
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
+                android:id="@+id/addhakathondata"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/btnteamsize"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="137dp"
-                android:layout_marginBottom="2dp"
-                android:text="Button" />
+                android:layout_gravity="center"
+                android:text="Add " />
 
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

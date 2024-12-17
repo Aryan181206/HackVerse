@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener
 
 
 
-class Dashboard : Fragment() {
+class Dashboard(private val name: String , private val userid : String , private val emailid : String) : Fragment() {
 
 
     // Firebase Database reference
@@ -58,15 +58,9 @@ class Dashboard : Fragment() {
         showuserid =view.findViewById(R.id.showuserid)
 
 
-        val data = arguments
-        val name = data?.getString("name").toString()
-        val userId = data?.getString("userid").toString()
-
         // Set the values to the TextViews
         showname.text = name
-        showuserid.text = userId
-
-
+        showuserid.text = userid
 
 
 

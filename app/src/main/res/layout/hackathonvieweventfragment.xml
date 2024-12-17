@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:layout_editor_absoluteX="12dp"
+    android:layout_gravity="center"
+    app:cardCornerRadius="20dp"
+    android:elevation="20dp"
+    android:layout_margin="15dp"
+    tools:layout_editor_absoluteY="7dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="399dp"
+        android:layout_height="154dp"
+        tools:layout_editor_absoluteX="-108dp"
+        tools:layout_editor_absoluteY="17dp">
+
+
+        <ImageView
+            android:id="@+id/showhackathonimg"
+            android:layout_width="113dp"
+            android:layout_height="101dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/profile" />
+
+        <TextView
+            android:id="@+id/showtitle"
+            android:layout_width="226dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:gravity="left"
+            android:text="HackMaster"
+            android:textSize="21dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.157"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/showorganisation"
+            android:layout_width="226dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="52dp"
+            android:gravity="left"
+            android:text="IIT ISM DHANBAD"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.157"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/showstartdate"
+            android:layout_width="103dp"
+            android:layout_height="21dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="100dp"
+            android:gravity="left"
+            android:text="18/12/2006"
+            android:textAlignment="center"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.347"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlCompat" />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="124dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="188dp"
+            android:text="Start Date -> "
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/showstartdate2"
+            android:layout_width="103dp"
+            android:layout_height="21dp"
+            android:layout_marginTop="96dp"
+            android:layout_marginEnd="100dp"
+            android:gravity="left"
+            android:text="18/12/2006"
+            android:textAlignment="center"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.347"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlCompat" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="96dp"
+            android:text="End Date -> "
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/showmode"
+            android:layout_width="48dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="124dp"
+            android:text="Online"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/showtype"
+            android:layout_width="48dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="140dp"
+            android:text="Paid"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="48dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="124dp"
+            android:text="Mode ->"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="78dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="264dp"
+            android:layout_marginTop="128dp"
+            android:text="Reward ->"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/showreward"
+            android:layout_width="52dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="328dp"
+            android:layout_marginTop="128dp"
+            android:text="20000$"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="78dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="128dp"
+            android:text="Team Size -> "
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/showteamsize"
+            android:layout_width="42dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="212dp"
+            android:layout_marginTop="128dp"
+            android:text="Single"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+
+            android:id="@+id/textView4"
+            android:layout_width="48dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="140dp"
+            android:text="Type  ->"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

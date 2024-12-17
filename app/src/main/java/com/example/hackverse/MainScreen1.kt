@@ -26,47 +26,35 @@ class MainScreen1 : AppCompatActivity() {
         }
 
 
+        // obtaining some profile data from signup screen
 
+        val namedata = intent.getStringExtra("name")
+        val emaildata = intent.getStringExtra("email")
+        val passdata = intent.getStringExtra("pass")
+        val useridata = intent.getStringExtra("userid")
 
-        // obtaining some profile data
-        val shownamedata = intent.getStringExtra((SignInScreen.KEY1))
-        val showuseriddata = intent.getStringExtra((SignInScreen.KEY2))
-        val showemaildata = intent.getStringExtra((SignInScreen.KEY3))
+        // obtaining some profile data from signin screen
+        val shownamedata = intent.getStringExtra("name")
+        val showuseriddata = intent.getStringExtra("userId")
+        val showemaildata = intent.getStringExtra("emailId")
 
+        val dashboardfragment = Dashboard(shownamedata.toString() , showuseriddata.toString() , showemaildata.toString())
 
-
-
-        val dashboardfragment =Dashboard()
-        val bundle = Bundle()
-        bundle.putString("name",shownamedata.toString())
-        bundle.putString("userid",showuseriddata.toString())
-
-        dashboardfragment.arguments = bundle
-
-
-
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.frame_layout, dashboardfragment) // Replace with your container ID
-            .commit()
-
-
-
-
-
+        val profilefragment = profile(namedata.toString(),useridata.toString() ,  emaildata.toString() , passdata.toString() )
 
 
 
         val bottomNavigationbar = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationbar.selectedItemId = R.id.Dashboard
-        replacewithfragemt(Dashboard())
+        replacewithfragemt(Dashboard(shownamedata.toString() ,showuseriddata.toString() , showemaildata.toString()))
 
         bottomNavigationbar.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.Team -> replacewithfragemt(team())
                 R.id.Event -> replacewithfragemt(Event())
-                R.id.Dashboard -> replacewithfragemt(Dashboard())
+                R.id.Dashboard -> replacewithfragemt(Dashboard(shownamedata.toString() ,showuseriddata.toString() , showemaildata.toString()))
                 R.id.Mentorship -> replacewithfragemt(Mentorship())
-                R.id.Profile -> replacewithfragemt(profile())
+                R.id.Profile -> replacewithfragemt(profile(namedata.toString(),useridata.toString() ,  emaildata.toString() , passdata.toString() ))
                 else -> {
 
                 }
