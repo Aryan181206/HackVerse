@@ -89,5 +89,34 @@
         app:layout_constraintVertical_bias="0.241"
         app:srcCompat="@drawable/logohackverse" />
 
+    <Button
+        android:id="@+id/googlebtn"
+        android:layout_width="205dp"
+        android:layout_height="51dp"
+        android:layout_marginRight="10dp"
+        android:backgroundTint="@color/light_gray"
+        android:backgroundTintMode="add"
+        android:gravity="right"
+        android:text="Google SignIn"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.441" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/googlebtn"
+        app:layout_constraintHorizontal_bias="0.154"
+        app:layout_constraintStart_toStartOf="@+id/googlebtn"
+        app:layout_constraintTop_toTopOf="@+id/googlebtn"
+        app:srcCompat="@drawable/googleicon" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

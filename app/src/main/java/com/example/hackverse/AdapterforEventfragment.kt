@@ -13,6 +13,9 @@ class AdapterforEventfragment(private val hackathonList : List<HackathonViewData
 
 
 
+
+
+
     inner class HackathonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // Initialize the views from your CardView layout
         val titleTextView: TextView = itemView.findViewById(R.id.showtitle)
@@ -23,7 +26,7 @@ class AdapterforEventfragment(private val hackathonList : List<HackathonViewData
         val typeTextView: TextView = itemView.findViewById(R.id.showtype)
         val rewardTextView: TextView = itemView.findViewById(R.id.showreward)
         val teamSizeTextView: TextView = itemView.findViewById(R.id.showteamsize)
-    }
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HackathonViewHolder {
         // Inflate the layout for each item in the RecyclerView
@@ -39,14 +42,12 @@ class AdapterforEventfragment(private val hackathonList : List<HackathonViewData
             val currentHackathon = hackathonList[position]
 
             // Bind data to the views
-            holder.titleTextView.text = currentHackathon.title
-            holder.organisationTextView.text = currentHackathon.organisation
-            holder.startDateTextView.text = currentHackathon.startDate
-            holder.endDateTextView.text = currentHackathon.endDate
-            holder.modeTextView.text = currentHackathon.mode
-            holder.typeTextView.text = currentHackathon.type
-            holder.rewardTextView.text = currentHackathon.reward
-            holder.teamSizeTextView.text = currentHackathon.teamSize
+            holder.titleTextView.text = currentHackathon.HackathonTitle
+            holder.organisationTextView.text = currentHackathon.OrganisationName
+            holder.modeTextView.text = currentHackathon.HackathonMode
+            holder.typeTextView.text = currentHackathon.HackathonType
+            holder.rewardTextView.text = currentHackathon.HackathonReward
+            holder.teamSizeTextView.text = currentHackathon.TeamSize
 
 
 

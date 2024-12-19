@@ -67,6 +67,7 @@ android {
         implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.29")
         implementation("com.github.bumptech.glide:glide:4.15.0")
         implementation("com.google.firebase:firebase-analytics")
+        implementation("com.google.android.gms:play-services-auth:20.7.0")
 
 
     }
@@ -83,4 +84,6 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.activity)
     implementation(libs.firebase.firestore)
+    implementation(libs.firebase.auth)
+    implementation(libs.androidx.legacy.support.v4)
 }

@@ -60,6 +60,8 @@ class Event : Fragment() {
             startActivity(intent)
         }
 
+
+
         return view
     }
 

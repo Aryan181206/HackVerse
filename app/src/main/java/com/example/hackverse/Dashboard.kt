@@ -55,12 +55,13 @@ class Dashboard(private val name: String , private val userid : String , private
 
 
         showname = view.findViewById(R.id.showname)
-        showuserid =view.findViewById(R.id.showuserid)
+
 
 
         // Set the values to the TextViews
         showname.text = name
-        showuserid.text = userid
+
+
 
 
 
