@@ -60,7 +60,7 @@
                         app:srcCompat="@drawable/person" />
 
                     <TextView
-                        android:id="@+id/nameofhackathon"
+                        android:id="@+id/detailTitle"
                         android:layout_width="185dp"
                         android:layout_height="37dp"
                         android:layout_marginTop="16dp"
@@ -72,7 +72,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/modeofhackathon"
+                        android:id="@+id/detailMode"
                         android:layout_width="75dp"
                         android:layout_height="21dp"
                         android:gravity="center"
@@ -85,7 +85,7 @@
                         app:layout_constraintVertical_bias="0.0" />
 
                     <TextView
-                        android:id="@+id/showstartdate"
+                        android:id="@+id/detailStartDate"
                         android:layout_width="76dp"
                         android:layout_height="21dp"
                         android:text="18/12/2006"
@@ -126,7 +126,7 @@
 
 
                     <TextView
-                        android:id="@+id/showtotalregistration2"
+                        android:id="@+id/detailCount"
                         android:layout_width="67dp"
                         android:layout_height="16dp"
                         android:text="5616"
@@ -138,7 +138,7 @@
                         app:layout_constraintVertical_bias="0.635" />
 
                     <TextView
-                        android:id="@+id/textView7"
+                        android:id="@+id/detailType"
                         android:layout_width="100dp"
                         android:layout_height="37dp"
                         android:layout_marginTop="16dp"
@@ -151,14 +151,14 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <Button
-                        android:id="@+id/button"
+                        android:id="@+id/register"
                         android:layout_width="348dp"
                         android:layout_height="49dp"
                         android:layout_marginTop="8dp"
                         android:text="Register"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                         />
 
                     <TextView
                         android:id="@+id/textView8"
@@ -184,7 +184,7 @@
                         app:layout_constraintVertical_bias="0.819" />
 
                     <TextView
-                        android:id="@+id/teamsizeofhackathon"
+                        android:id="@+id/detailTeamSize"
                         android:layout_width="67dp"
                         android:layout_height="16dp"
                         android:text="5616"
@@ -289,7 +289,7 @@
                         app:srcCompat="@drawable/img_3" />
 
                     <TextView
-                        android:id="@+id/rewardofhackathon"
+                        android:id="@+id/detailReward"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="TextView"
@@ -334,7 +334,7 @@
                         app:layout_constraintVertical_bias="0.138" />
 
                     <TextView
-                        android:id="@+id/nameoforganisation"
+                        android:id="@+id/detailOrganisation"
                         android:layout_width="158dp"
                         android:layout_height="28dp"
                         android:gravity="center"
@@ -390,7 +390,7 @@
                         app:layout_constraintVertical_bias="0.644" />
 
                     <TextView
-                        android:id="@+id/textView9"
+                        android:id="@+id/detailEndDate"
                         android:layout_width="209dp"
                         android:layout_height="16dp"
                         android:text="18/12/2006"

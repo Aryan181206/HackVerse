@@ -18,17 +18,17 @@
         android:theme="@style/Theme.HackVerse"
         tools:targetApi="31">
         <activity
+            android:name=".RegistrationScreen"
+            android:exported="false" />
+        <activity
             android:name=".HackathonDetailsActivity"
-            android:exported="true" >
-
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".AddNewHackathonScreen"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".MainScreen1"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".SignInScreen"
             android:exported="false" />
@@ -43,8 +43,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
         </activity>
     </application>
 

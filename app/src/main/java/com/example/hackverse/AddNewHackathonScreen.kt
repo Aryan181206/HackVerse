@@ -238,7 +238,6 @@ class AddNewHackathonScreen : AppCompatActivity() {
             }
 
 
-
             // Convert the date to a Firestore Timestamp (optional, if you want to store the date in Timestamp format)
             val calendar = Calendar.getInstance()
             val startDateParts = HackathonstartDate.split("/")
@@ -269,45 +268,69 @@ class AddNewHackathonScreen : AppCompatActivity() {
                 "HackathonDescription" to Hackathondescription.text.toString()
             )
 
-            // Adding data to Firestore
+            // Fetch all documents to determine the next ID
             db.collection("AddedHackathonData")
-                .add(HackathonData)
-                .addOnSuccessListener {
-                    Toast.makeText(this, "Hackathon Added successfully", Toast.LENGTH_SHORT).show()
+                .get()
+                .addOnSuccessListener { documents ->
+                    val nextDocId =
+                        "Hackathon${documents.size() + 1}" // Increment based on the current size
 
-                    val intent = Intent (this , MainScreen1 :: class.java)
-                    startActivity(intent)
+                    // Add data with the custom document ID
+                    db.collection("AddedHackathonData").document(nextDocId)
+                        .set(HackathonData)
+                        .addOnSuccessListener {
+                            Toast.makeText(
+                                this,
+                                "Hackathon added successfully with ID: $nextDocId",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                            // Navigate to the next screen
+                            val intent = Intent(this, MainScreen1::class.java)
+                            startActivity(intent)
+                        }
+                        .addOnFailureListener { exception ->
+                            Toast.makeText(
+                                this,
+                                "Some error occurred: ${exception.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                 }
-                .addOnFailureListener {
-                    Toast.makeText(this, "Some Error Occurred", Toast.LENGTH_SHORT).show()
+                .addOnFailureListener { exception ->
+                    Toast.makeText(
+                        this,
+                        "Error fetching documents: ${exception.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
         }
     }
 
 
-    private fun showDatePickerDialog(isStartDate: Boolean) {
-        val calendar = Calendar.getInstance()
+        private fun showDatePickerDialog(isStartDate: Boolean) {
+            val calendar = Calendar.getInstance()
 
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-        val datePickerDialog = DatePickerDialog(
-            this, { _, selectedYear, selectedMonth, selectedDay ->
-                // Format the selected date in dd/MM/yyyy format
-                val formattedDate =
-                    String.format("%02d/%02d/%d", selectedDay, selectedMonth + 1, selectedYear)
+            val datePickerDialog = DatePickerDialog(
+                this, { _, selectedYear, selectedMonth, selectedDay ->
+                    // Format the selected date in dd/MM/yyyy format
+                    val formattedDate =
+                        String.format("%02d/%02d/%d", selectedDay, selectedMonth + 1, selectedYear)
 
-                // Set the selected date to the respective EditText
-                if (isStartDate) {
-                    editTextStartDate.setText(formattedDate)
-                } else {
-                    editTextEndDate.setText(formattedDate)
-                }
-            },
-            year, month, day
-        )
+                    // Set the selected date to the respective EditText
+                    if (isStartDate) {
+                        editTextStartDate.setText(formattedDate)
+                    } else {
+                        editTextEndDate.setText(formattedDate)
+                    }
+                },
+                year, month, day
+            )
 
-        datePickerDialog.show()
+            datePickerDialog.show()
+        }
     }
-}

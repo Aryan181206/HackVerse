@@ -1,7 +1,9 @@
 package com.example.hackverse
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -21,25 +23,64 @@ class HackathonDetailsActivity : AppCompatActivity() {
             insets
         }
 
-        // Retrieve the ArrayList from Intent
-        val hackathonDetails = intent.getStringArrayListExtra("dataofhackathon")
 
-        if (hackathonDetails!=null){
-            val hackathonTitle: TextView = findViewById(R.id.nameofhackathon)
-            val organisationName: TextView = findViewById(R.id.nameoforganisation)
-            val hackathonMode: TextView = findViewById(R.id.modeofhackathon)
-            val hackathonType: TextView = findViewById(R.id.showtype)
-            val hackathonReward: TextView = findViewById(R.id.rewardofhackathon)
-            val teamSize: TextView = findViewById(R.id.teamsizeofhackathon)
+        // Initialize views
+        val titleTextView: TextView = findViewById(R.id.detailTitle)
+        val organisationTextView: TextView = findViewById(R.id.detailOrganisation)
+        val startDateTextView: TextView = findViewById(R.id.detailStartDate)
+        val endDateTextView: TextView = findViewById(R.id.detailEndDate)
+        val modeTextView: TextView = findViewById(R.id.detailMode)
+        val typeTextView: TextView = findViewById(R.id.detailType)
+        val rewardTextView: TextView = findViewById(R.id.detailReward)
+        val teamSizeTextView: TextView = findViewById(R.id.detailTeamSize)
+        val totalcountTextView: TextView = findViewById(R.id.detailCount)
+        val reg =findViewById<Button>(R.id.register)
 
-            hackathonTitle.text = hackathonDetails?.getOrNull(0) // HackathonTitle
-            organisationName.text =  hackathonDetails?.getOrNull(1) // OrganisationName
-            hackathonMode.text =  hackathonDetails?.getOrNull(2) // HackathonMode
-            hackathonType.text =  hackathonDetails?.getOrNull(3) // HackathonType
-            hackathonReward.text =  hackathonDetails?.getOrNull(4) // HackathonReward
-            teamSize.text =  hackathonDetails?.getOrNull(5) // TeamSize
 
+        //val hackathonImageView: ImageView = findViewById(R.id.detailImageView)
+
+
+        // Get data from intent
+        val title = intent.getStringExtra("HackathonTitle")
+        val organisation = intent.getStringExtra("OrganisationName")
+        val startDate = intent.getStringExtra("StartDate")
+        val endDate = intent.getStringExtra("EndDate")
+        val mode = intent.getStringExtra("HackathonMode")
+        val type = intent.getStringExtra("HackathonType")
+        val reward = intent.getStringExtra("HackathonReward")
+        val teamSize = intent.getStringExtra("TeamSize")
+        val hackathonid = intent.getStringExtra("HackathonId")
+        val totalcount = intent.getStringExtra("TotalCount")
+        //val imageUrl = intent.getStringExtra("ImageUrl")
+
+
+        reg.setOnClickListener {
+            val intent = Intent(this, RegistrationScreen::class.java)
+            intent.putExtra("Hackathonclickedid",hackathonid)  // importent line
+            startActivity(intent)
         }
+
+
+        // Set data to views
+        titleTextView.text = title
+        organisationTextView.text = organisation
+        startDateTextView.text = startDate
+        endDateTextView.text = endDate
+        modeTextView.text = mode
+        typeTextView.text = type
+        rewardTextView.text = reward
+        teamSizeTextView.text = teamSize
+        totalcountTextView.text = totalcount
+
+
+
+
+        //Glide.with(this)
+          //  .load(imageUrl)
+            //.placeholder(R.drawable.placeholder)
+            //.error(R.drawable.error_image)
+            //.into(hackathonImageView)
+
 
     }
 }
