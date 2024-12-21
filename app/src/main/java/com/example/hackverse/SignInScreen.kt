@@ -77,7 +77,7 @@ class SignInScreen : AppCompatActivity() {
                         if (task.isSuccessful) {
                             // Get the authenticated user's info
                             val user = mAuth.currentUser
-                            val uid = FirebaseAuth.getInstance().currentUser?.uid
+                            val uid = user?.uid
                             // Fetch additional user details from Firestore
                             firestore.collection("Userdata").document(uid!!)
                                 .get()
@@ -93,6 +93,7 @@ class SignInScreen : AppCompatActivity() {
                                     intentMainScreen1.putExtra("name", name)
                                     intentMainScreen1.putExtra("email", email)
                                     intentMainScreen1.putExtra("uid", uid) // ye hai unique id
+
                                     startActivity(intentMainScreen1)
 
                                 }.addOnFailureListener {

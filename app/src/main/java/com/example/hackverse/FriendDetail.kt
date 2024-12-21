@@ -35,12 +35,6 @@ class FriendDetail : AppCompatActivity() {
         friendEmailEditText = findViewById(R.id.friendEmail)
         addButton = findViewById(R.id.add)
 
-        val uid = intent.getStringExtra("uiddata") ?: ""
-        if (uid.isEmpty()) {
-            Toast.makeText(this, "UID is missing", Toast.LENGTH_SHORT).show()
-            finish() // Close activity if no UID is found
-            return
-        }
 
 
 
@@ -50,6 +44,13 @@ class FriendDetail : AppCompatActivity() {
             val email = friendEmailEditText.text.toString()
 
             if (name.isNotEmpty() && email.isNotEmpty()) {
+
+                val uid = intent.getStringExtra("uiddata") ?: ""
+                if (uid.isEmpty()) {
+                    Toast.makeText(this, "UID is missing", Toast.LENGTH_SHORT).show()
+                    finish() // Close activity if no UID is found
+                }
+
                 checkEmailInFirebaseAuth(uid, name, email)
             } else {
                 Toast.makeText(this, "Please enter valid details", Toast.LENGTH_SHORT).show()

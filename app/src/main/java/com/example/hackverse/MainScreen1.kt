@@ -31,11 +31,7 @@ class MainScreen1 : AppCompatActivity() {
 
         val namedata = intent.getStringExtra("name")
         val emaildata = intent.getStringExtra("email")
-        val uiddata = intent.getStringExtra("uid") ?: ""
 
-        val int = Intent(this,MainScreen1::class.java)
-            int.putExtra("uiddata", uiddata)
-            startActivity(int)
 
 
         // obtaining some profile data from signin screen

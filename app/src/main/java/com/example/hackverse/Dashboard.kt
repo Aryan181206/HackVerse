@@ -12,7 +12,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 
-class Dashboard(private val name: String, private val userid: String) : Fragment() {
+class Dashboard(private val name: String, private val email: String) : Fragment() {
 
 
     // Firebase Database reference
@@ -51,13 +51,6 @@ class Dashboard(private val name: String, private val userid: String) : Fragment
 
         // Set the values to the TextViews
         showname.text = name
-
-
-
-
-
-
-
 
 
         recyclerView = view.findViewById(R.id.recyclerviewindashboard)
