@@ -92,7 +92,9 @@ class SignInScreen : AppCompatActivity() {
                                     val intentMainScreen1 = Intent(this, MainScreen1::class.java)
                                     intentMainScreen1.putExtra("name", name)
                                     intentMainScreen1.putExtra("email", email)
-                                    intentMainScreen1.putExtra("uid", uid) // ye hai unique id
+                                    val intentFriendDetail = Intent(this, FriendDetail::class.java)
+                                    intentFriendDetail.putExtra("uiddata", uid) // Pass the UID as "uiddata"
+                                    startActivity(intentFriendDetail)
 
                                     startActivity(intentMainScreen1)
 
