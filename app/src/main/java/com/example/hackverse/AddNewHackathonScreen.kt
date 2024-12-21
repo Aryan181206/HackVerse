@@ -46,7 +46,7 @@ class AddNewHackathonScreen : AppCompatActivity() {
         val spinnerTeamSize: Spinner = findViewById(R.id.spinnerteamsize)
 
         //team size options
-        val teamSizes = arrayOf("Select Team Size", "Single", "2", "3", "4", "5", "6")
+        val teamSizes = arrayOf("Select Team Size", "1", "2", "3", "4", "5", "6")
         val mode = arrayOf("Select Mode", "Online", "Offline")
 
 

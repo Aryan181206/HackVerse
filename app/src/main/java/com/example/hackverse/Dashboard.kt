@@ -1,7 +1,6 @@
 package com.example.hackverse
 
 import android.os.Bundle
-import android.service.autofill.UserData
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,19 +8,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hackverse.SignInScreen.Companion.KEY1
-import com.example.hackverse.SignInScreen.Companion.KEY2
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 
 
-
-
-
-class Dashboard(private val name: String , private val userid : String , private val emailid : String) : Fragment() {
+class Dashboard(private val name: String, private val userid: String) : Fragment() {
 
 
     // Firebase Database reference
@@ -35,7 +26,7 @@ class Dashboard(private val name: String , private val userid : String , private
     private lateinit var dataList: List<hackathinviewdata>
 
     lateinit var showname : TextView
-    lateinit var showuserid : TextView
+
 
 
 

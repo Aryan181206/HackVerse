@@ -50,6 +50,7 @@ class AdapterforEventfragment(private val hackathonList : List<HackathonViewData
                         putExtra("TeamSize", selectedHackathon.TeamSize)
                         putExtra("HackathonId",selectedHackathon.HackathonId)
                         putExtra("TotalCount",selectedHackathon.TotalCount)
+
                         //putExtra("ImageUrl", selectedHackathon.imageUrl) // Optional
                     }
                     context.startActivity(intent)

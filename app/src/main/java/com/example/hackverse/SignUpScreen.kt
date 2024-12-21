@@ -24,10 +24,13 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class SignUpScreen : AppCompatActivity() {
     private lateinit var database: DatabaseReference
+    private lateinit var mAuth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
 
 
     @SuppressLint("MissingInflatedId")
@@ -39,70 +42,81 @@ class SignUpScreen : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
-        }//for firebase authentication
+        }
+
+        // Initialize Firestore
+        firestore = FirebaseFirestore.getInstance()
+        mAuth = FirebaseAuth.getInstance()
+
+        //for firebase authentication
 
         val nameUser = findViewById<TextInputEditText>(R.id.etname)
         val emailUser = findViewById<TextInputEditText>(R.id.etemail)
         val passUser = findViewById<TextInputEditText>(R.id.etpassword)
-        val useridUser = findViewById<TextInputEditText>(R.id.etuserid)
         val registerButton = findViewById<Button>(R.id.btnCreate)
 
         registerButton.setOnClickListener {
             val name = nameUser.text.toString()
-            val email = emailUser.text.toString().replace(".", ",")
+            val email = emailUser.text.toString()
             val pass = passUser.text.toString()
-            val userid = useridUser.text.toString()
+
 
             // confirm that all is filled
-            if (name.isNotEmpty() && email.isNotEmpty() && pass.isNotEmpty() && userid.isNotEmpty()) {
+            if (name.isNotEmpty() && email.isNotEmpty() && pass.isNotEmpty() ) {
 
-                //obtain data
-                val user = User(name, email, pass, userid)
-                database = FirebaseDatabase.getInstance().getReference("Users")
-                database.child(userid).get().addOnSuccessListener {
-                    if (it.exists()) {
-                        Toast.makeText(
-                            this,
-                            "User Id must be Unique Already exits",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    } else {
-                        // writing the data into firebase database
-                        database.child(userid).setValue(user).addOnSuccessListener {
-                            Toast.makeText(this, "Account Created ", Toast.LENGTH_SHORT).show()
+                // Create user with FirebaseAuth
+                mAuth.createUserWithEmailAndPassword(email, pass)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            // Get the unique user ID (uid)
+                            val uid = task.result?.user?.uid
 
-                            //navigating to mainscreen 1 when account created
-                            val intentToMain1 = Intent(this, MainScreen1::class.java)
-                            intentToMain1.putExtra("name", name)
-                            intentToMain1.putExtra("email", email)
-                            intentToMain1.putExtra("pass", pass)
-                            intentToMain1.putExtra("userId", userid)
-                            startActivity(intentToMain1)
+                            // Store user data in Firestore
+                            val user = hashMapOf(
+                                "name" to name,
+                                "email" to email
+                            )
 
-                        }.addOnFailureListener {
-                            Toast.makeText(this, "Account Creation failed ", Toast.LENGTH_SHORT)
-                                .show()
+                            firestore.collection("Userdata").document(uid!!)
+                                .set(user)
+                                .addOnSuccessListener {
+                                    Toast.makeText(this, "Account Created", Toast.LENGTH_SHORT)
+                                        .show()
+
+
+                                    // Navigate to MainScreen1
+                                    val intentToMain1 = Intent(this, MainScreen1::class.java)
+                                    intentToMain1.putExtra("name", name)
+                                    intentToMain1.putExtra("uid", uid)
+                                    intentToMain1.putExtra("email", email)
+                                    startActivity(intentToMain1)
+                                }.addOnFailureListener {
+                                    Toast.makeText(
+                                        this,
+                                        "Failed to save user data",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                        } else {
+                            Toast.makeText(
+                                this,
+                                "Registration Failed: ${task.exception?.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
-                }
             } else {
-                Toast.makeText(this, "Provide All Details", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
             }
-        }
 
-        val existingUser = findViewById<TextView>(R.id.tosignin)
-        existingUser.setOnClickListener {
-            val intentExist = Intent(this, SignInScreen::class.java)
-            startActivity(intentExist)
+
+            val existingUser = findViewById<TextView>(R.id.tosignin)
+            existingUser.setOnClickListener {
+                val intentExist = Intent(this, SignInScreen::class.java)
+                startActivity(intentExist)
+            }
+
         }
 
     }
-
-
-
-
-
-
-
-
 }

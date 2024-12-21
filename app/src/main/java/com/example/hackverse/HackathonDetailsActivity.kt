@@ -51,12 +51,14 @@ class HackathonDetailsActivity : AppCompatActivity() {
         val teamSize = intent.getStringExtra("TeamSize")
         val hackathonid = intent.getStringExtra("HackathonId")
         val totalcount = intent.getStringExtra("TotalCount")
+
         //val imageUrl = intent.getStringExtra("ImageUrl")
 
 
         reg.setOnClickListener {
             val intent = Intent(this, RegistrationScreen::class.java)
             intent.putExtra("Hackathonclickedid",hackathonid)  // importent line
+
             startActivity(intent)
         }
 

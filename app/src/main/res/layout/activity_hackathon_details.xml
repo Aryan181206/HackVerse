@@ -48,53 +48,71 @@
 
                     <ImageView
                         android:id="@+id/showimage"
-                        android:layout_width="94dp"
-                        android:layout_height="87dp"
+                        android:layout_width="71dp"
+                        android:layout_height="69dp"
                         android:background="@drawable/spinner_border"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.052"
+                        app:layout_constraintHorizontal_bias="0.059"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.155"
+                        app:layout_constraintVertical_bias="0.164"
                         app:srcCompat="@drawable/person" />
 
                     <TextView
                         android:id="@+id/detailTitle"
                         android:layout_width="185dp"
                         android:layout_height="37dp"
-                        android:layout_marginTop="16dp"
                         android:text="HackMaster"
-                        android:textSize="25dp"
+                        android:textSize="27dp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.145"
+                        app:layout_constraintHorizontal_bias="0.101"
                         app:layout_constraintStart_toEndOf="@+id/showimage"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.13" />
 
                     <TextView
                         android:id="@+id/detailMode"
-                        android:layout_width="75dp"
-                        android:layout_height="21dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Online"
+                        android:textSize="22dp"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.442"
+                        app:layout_constraintHorizontal_bias="0.177"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/showimage"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.73" />
 
                     <TextView
                         android:id="@+id/detailStartDate"
-                        android:layout_width="76dp"
-                        android:layout_height="21dp"
+                        android:layout_width="152dp"
+                        android:layout_height="31dp"
                         android:text="18/12/2006"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.346"
+                        app:layout_constraintHorizontal_bias="0.252"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.884" />
+                        app:layout_constraintVertical_bias="0.984" />
+
+                    <ImageView
+                        android:id="@+id/imageView16"
+                        android:layout_width="31dp"
+                        android:layout_height="62dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.066"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.969"
+                        app:srcCompat="@drawable/img_7" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -107,10 +125,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:layout_margin="20dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 app:cardCornerRadius="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.423"
+                app:layout_constraintHorizontal_bias="0.365"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView2">
 
@@ -127,95 +145,101 @@
 
                     <TextView
                         android:id="@+id/detailCount"
-                        android:layout_width="67dp"
-                        android:layout_height="16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="5616"
+                        android:textSize="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.195"
+                        app:layout_constraintHorizontal_bias="0.203"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.635" />
+                        app:layout_constraintVertical_bias="0.666" />
 
                     <TextView
                         android:id="@+id/detailType"
                         android:layout_width="100dp"
                         android:layout_height="37dp"
-                        android:layout_marginTop="16dp"
                         android:text="Free"
                         android:textSize="30dp"
                         android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.066"
+                        app:layout_constraintHorizontal_bias="0.063"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.087" />
 
                     <Button
                         android:id="@+id/register"
-                        android:layout_width="348dp"
-                        android:layout_height="49dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_width="333dp"
+                        android:layout_height="43dp"
                         android:text="Register"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                         />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.309" />
 
                     <TextView
                         android:id="@+id/textView8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Registered"
+                        android:textSize="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.195"
+                        app:layout_constraintHorizontal_bias="0.231"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.554" />
+                        app:layout_constraintVertical_bias="0.55" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Team Size"
+                        android:textSize="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.195"
+                        app:layout_constraintHorizontal_bias="0.237"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.819" />
+                        app:layout_constraintVertical_bias="0.787" />
 
                     <TextView
                         android:id="@+id/detailTeamSize"
-                        android:layout_width="67dp"
-                        android:layout_height="16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="5616"
+                        android:textSize="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.195"
+                        app:layout_constraintHorizontal_bias="0.209"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.892" />
+                        app:layout_constraintVertical_bias="0.898" />
 
                     <ImageView
                         android:id="@+id/imageView12"
-                        android:layout_width="34dp"
-                        android:layout_height="35dp"
+                        android:layout_width="45dp"
+                        android:layout_height="46dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.054"
+                        app:layout_constraintHorizontal_bias="0.052"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.6"
+                        app:layout_constraintVertical_bias="0.632"
                         app:srcCompat="@drawable/img_1" />
 
                     <ImageView
-                        android:layout_width="34dp"
-                        android:layout_height="35dp"
+                        android:layout_width="46dp"
+                        android:layout_height="44dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.054"
+                        app:layout_constraintHorizontal_bias="0.052"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.882"
+                        app:layout_constraintVertical_bias="0.909"
                         app:srcCompat="@drawable/img_2" />
 
 
@@ -271,30 +295,48 @@
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.085"
+                        app:layout_constraintHorizontal_bias="0.081"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.108" />
+                        app:layout_constraintVertical_bias="0.041" />
 
                     <ImageView
                         android:id="@+id/imageView11"
-                        android:layout_width="194dp"
-                        android:layout_height="34dp"
+                        android:layout_width="187dp"
+                        android:layout_height="37dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.086"
+                        app:layout_constraintHorizontal_bias="0.078"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.39"
+                        app:layout_constraintVertical_bias="0.4"
                         app:srcCompat="@drawable/img_3" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Prizes worth "
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.159"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.405"
+                        tools:ignore="MissingConstraints" />
 
                     <TextView
                         android:id="@+id/detailReward"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TextView"
-                        tools:layout_editor_absoluteX="167dp"
-                        tools:layout_editor_absoluteY="56dp"
+                        android:text="2000$"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.423"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.405"
                         tools:ignore="MissingConstraints" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -321,6 +363,29 @@
 
                     <TextView
 
+                        android:layout_width="212dp"
+                        android:layout_height="19dp"
+                        android:text="Contact No. : 1800 1800 150"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.114"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.621" />
+
+                    <TextView
+                        android:layout_width="331dp"
+                        android:layout_height="21dp"
+                        android:text="Contact Mail : hackathoneventorganiser@won.ac.in"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.761"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.807" />
+
+                    <TextView
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Contact Organiser"
@@ -328,10 +393,10 @@
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.059"
+                        app:layout_constraintHorizontal_bias="0.027"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.138" />
+                        app:layout_constraintVertical_bias="0.0" />
 
                     <TextView
                         android:id="@+id/detailOrganisation"
@@ -339,23 +404,25 @@
                         android:layout_height="28dp"
                         android:gravity="center"
                         android:text="IIT ISM DHANBAD"
+                        android:textStyle="bold"
                         android:textSize="15dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.144"
+                        app:layout_constraintHorizontal_bias="0.154"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.46" />
+                        app:layout_constraintVertical_bias="0.401" />
 
                     <ImageView
                         android:id="@+id/imageView9"
                         android:layout_width="24dp"
                         android:layout_height="28dp"
-                        android:layout_marginStart="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.048"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.431"
+                        app:layout_constraintVertical_bias="0.401"
                         app:srcCompat="@drawable/img_4" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -363,8 +430,9 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardView7"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="200dp"
                 android:layout_margin="20dp"
                 app:cardCornerRadius="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -378,16 +446,49 @@
                     android:layout_margin="5dp">
 
 
+                    <ImageView
+                        android:id="@+id/imageView18"
+                        android:layout_width="23dp"
+                        android:layout_height="73dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.141"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.589"
+                        app:srcCompat="@drawable/img_12" />
+
                     <TextView
+                        android:layout_width="212dp"
+                        android:layout_height="19dp"
+                        android:text="Mid Evaluation"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.526" />
+
+                    <TextView
+                        android:id="@+id/textView15"
                         android:layout_width="212dp"
                         android:layout_height="19dp"
                         android:text="Announcment of Problem statement"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.084"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.644" />
+                        app:layout_constraintVertical_bias="0.415" />
+
+                    <TextView
+                        android:id="@+id/textView16"
+                        android:layout_width="212dp"
+                        android:layout_height="19dp"
+                        android:text="Final Submission"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.637" />
 
                     <TextView
                         android:id="@+id/detailEndDate"
@@ -396,24 +497,36 @@
                         android:text="18/12/2006"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.503"
+                        app:layout_constraintHorizontal_bias="0.568"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.427" />
+                        app:layout_constraintVertical_bias="0.816" />
+
+                    <TextView
+                        android:id="@+id/detailEndDate2"
+                        android:layout_width="209dp"
+                        android:layout_height="16dp"
+                        android:text="18/12/2006"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.568"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.27" />
 
                     <TextView
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Timeline"
-                        android:textSize="20dp"
+                        android:textSize="25dp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.051"
+                        app:layout_constraintHorizontal_bias="0.049"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.141" />
+                        app:layout_constraintVertical_bias="0.019" />
 
                     <TextView
                         android:id="@+id/textView6"
@@ -422,14 +535,69 @@
                         android:text="Start Date :"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.048"
+                        app:layout_constraintHorizontal_bias="0.046"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.429" />
+                        app:layout_constraintVertical_bias="0.27" />
+
+                    <TextView
+                        android:id="@+id/textView17"
+                        android:layout_width="84dp"
+                        android:layout_height="16dp"
+                        android:text="End Date :"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.057"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.816" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/register2"
+                android:layout_width="187dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:layout_marginTop="12dp"
+                android:text="Register"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.635"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView7" />
+
+            <Button
+                android:id="@+id/register3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/light_gray"
+                android:drawableStart="@android:drawable/stat_notify_chat"
+                android:text="FeedBack"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView7"
+                app:layout_constraintVertical_bias="0.055" />
+
+            <ImageView
+                android:id="@+id/tosavehacathon"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.871"
+                app:layout_constraintStart_toEndOf="@+id/register3"
+                app:layout_constraintTop_toBottomOf="@+id/cardView7"
+                app:layout_constraintVertical_bias="0.515"
+                app:srcCompat="@android:drawable/ic_menu_save" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

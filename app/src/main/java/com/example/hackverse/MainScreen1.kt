@@ -1,20 +1,18 @@
 package com.example.hackverse
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainScreen1 : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,35 +24,42 @@ class MainScreen1 : AppCompatActivity() {
         }
 
 
+
+
+
         // obtaining some profile data from signup screen
 
         val namedata = intent.getStringExtra("name")
         val emaildata = intent.getStringExtra("email")
-        val passdata = intent.getStringExtra("pass")
-        val useridata = intent.getStringExtra("userid")
+        val uiddata = intent.getStringExtra("uid") ?: ""
+
+        val int = Intent(this,MainScreen1::class.java)
+            int.putExtra("uiddata", uiddata)
+            startActivity(int)
+
 
         // obtaining some profile data from signin screen
         val shownamedata = intent.getStringExtra("name")
-        val showuseriddata = intent.getStringExtra("userId")
         val showemaildata = intent.getStringExtra("emailId")
 
-        val dashboardfragment = Dashboard(shownamedata.toString() , showuseriddata.toString() , showemaildata.toString())
 
-        val profilefragment = profile(namedata.toString(),useridata.toString() ,  emaildata.toString() , passdata.toString() )
+        val dashboardfragment = Dashboard(shownamedata.toString() , showemaildata.toString())
+
+        val profilefragment = profile(namedata.toString(), emaildata.toString())
 
 
 
         val bottomNavigationbar = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationbar.selectedItemId = R.id.Dashboard
-        replacewithfragemt(Dashboard(shownamedata.toString() ,showuseriddata.toString() , showemaildata.toString()))
+        replacewithfragemt(Dashboard(shownamedata.toString() , showemaildata.toString()))
 
         bottomNavigationbar.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.Team -> replacewithfragemt(team())
                 R.id.Event -> replacewithfragemt(Event())
-                R.id.Dashboard -> replacewithfragemt(Dashboard(shownamedata.toString() ,showuseriddata.toString() , showemaildata.toString()))
+                R.id.Dashboard -> replacewithfragemt(Dashboard(shownamedata.toString() , showemaildata.toString()))
                 R.id.Mentorship -> replacewithfragemt(Mentorship())
-                R.id.Profile -> replacewithfragemt(profile(namedata.toString(),useridata.toString() ,  emaildata.toString() , passdata.toString() ))
+                R.id.Profile -> replacewithfragemt(profile(namedata.toString(),  emaildata.toString()))
                 else -> {
 
                 }

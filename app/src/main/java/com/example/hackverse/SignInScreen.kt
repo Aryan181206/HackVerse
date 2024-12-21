@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 import android.annotation.SuppressLint
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.firestore.FirebaseFirestore
 
 class SignInScreen : AppCompatActivity() {
 
@@ -30,6 +31,7 @@ class SignInScreen : AppCompatActivity() {
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private val RC_SIGN_IN = 9001
     lateinit var databaseReference: DatabaseReference
+    private lateinit var firestore: FirebaseFirestore
 
     companion object {
         const val KEY1 = "com.example.hackverse.SignInScreen.KEY1"
@@ -44,6 +46,9 @@ class SignInScreen : AppCompatActivity() {
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance()
+        // Initialize Firestore
+
+        firestore = FirebaseFirestore.getInstance()
 
         // Configure Google Sign-In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -56,22 +61,59 @@ class SignInScreen : AppCompatActivity() {
         // Initialize views
         val toSignUpScreen = findViewById<TextView>(R.id.tosignup)
         val signInButton = findViewById<Button>(R.id.btnSignIn)
-        val userId = findViewById<TextInputEditText>(R.id.userIdEditText)
+        val emailId = findViewById<TextInputEditText>(R.id.emailIdEditText)
         val userPass = findViewById<TextInputEditText>(R.id.userPassEditText)
         val googleSignInButton = findViewById<Button>(R.id.googlebtn)
+        val forgotPasswordText = findViewById<TextView>(R.id.forgotPasswordText)
 
         // Handle Sign In Button click
         signInButton.setOnClickListener {
-            val userIdString = userId.text.toString().replace(".", ",")
-            val passwordString = userPass.text.toString()
+            val email = emailId.text.toString()
+            val password = userPass.text.toString()
 
-            if (userIdString.isNotEmpty() && passwordString.isNotEmpty()) {
-                readData(userIdString, passwordString)
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            // Get the authenticated user's info
+                            val user = mAuth.currentUser
+                            val uid = FirebaseAuth.getInstance().currentUser?.uid
+                            // Fetch additional user details from Firestore
+                            firestore.collection("Userdata").document(uid!!)
+                                .get()
+                                .addOnSuccessListener { document ->
+                                    val name = document.getString("name")
+                                    val email = document.getString("email")
+                                    Toast.makeText(this, "Sign-In Successful", Toast.LENGTH_SHORT)
+                                        .show()
+
+
+                                    // Navigate to Main Screen
+                                    val intentMainScreen1 = Intent(this, MainScreen1::class.java)
+                                    intentMainScreen1.putExtra("name", name)
+                                    intentMainScreen1.putExtra("email", email)
+                                    intentMainScreen1.putExtra("uid", uid) // ye hai unique id
+                                    startActivity(intentMainScreen1)
+
+                                }.addOnFailureListener {
+                                    Toast.makeText(
+                                        this,
+                                        "Failed to fetch user data",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                        } else {
+                            Toast.makeText(
+                                this,
+                                "Sign-In Failed: ${task.exception?.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
             } else {
-                Toast.makeText(this, "Enter User Id and Password", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
             }
         }
-
         // Navigate to Sign Up Screen
         toSignUpScreen.setOnClickListener {
             val newUserintent = Intent(this, SignUpScreen::class.java)
@@ -82,40 +124,32 @@ class SignInScreen : AppCompatActivity() {
         googleSignInButton.setOnClickListener {
             signInWithGoogle()
         }
-    }
 
-    // Check for Firebase Database user credentials
-    private fun readData(userid: String, pass: String) {
-        databaseReference = FirebaseDatabase.getInstance().getReference("Users")
-        databaseReference.child(userid).get().addOnSuccessListener {
-            if (it.exists()) {
-                val storedPassword = it.child("pass").value.toString()
-                if (storedPassword == pass) {
-                    Toast.makeText(this, "Sign In Successful", Toast.LENGTH_SHORT).show()
-
-                    // Retrieve user info
-                    val emailId = it.child("email").value.toString()
-                    val nameId = it.child("name").value.toString()
-                    val userId = it.child("userid").value.toString()
-
-                    // Navigate to Main Screen and pass data
-                    val intentMainScreen1 = Intent(this, MainScreen1::class.java)
-                    intentMainScreen1.putExtra("name", nameId)
-                    intentMainScreen1.putExtra("userId", userId)
-                    intentMainScreen1.putExtra("emailId", emailId)
-                    startActivity(intentMainScreen1)
-                } else {
-                    Toast.makeText(this, "Incorrect Password", Toast.LENGTH_SHORT).show()
-                }
+        // Handle Forgot Password
+        forgotPasswordText.setOnClickListener {
+            val email = emailId.text.toString()
+            if (email.isNotEmpty()) {
+                mAuth.sendPasswordResetEmail(email)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(this, "Password reset email sent", Toast.LENGTH_SHORT)
+                                .show()
+                        } else {
+                            Toast.makeText(
+                                this,
+                                "Error: ${task.exception?.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
             } else {
-                Toast.makeText(this, "User Does not Exist, Sign Up First", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enter your email address", Toast.LENGTH_SHORT).show()
             }
-        }.addOnFailureListener {
-            Toast.makeText(this, "Failed to read data from the database", Toast.LENGTH_SHORT).show()
         }
     }
 
-    // Google Sign-In logic
+
+       //Google Sign-In logic
     private fun signInWithGoogle() {
         val signInIntent = mGoogleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)

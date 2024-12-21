@@ -68,6 +68,9 @@ android {
         implementation("com.github.bumptech.glide:glide:4.15.0")
         implementation("com.google.firebase:firebase-analytics")
         implementation("com.google.android.gms:play-services-auth:20.7.0")
+        implementation ("com.google.firebase:firebase-dynamic-links:21.1.0")
+        implementation ("com.google.firebase:firebase-dynamic-links")
+        implementation ("com.google.firebase:firebase-auth:22.1.1")
 
 
     }
@@ -86,4 +89,5 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.auth)
     implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.firebase.messaging.ktx)
 }

@@ -16,7 +16,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [profile.newInstance] factory method to
  * create an instance of this fragment.
  */
-class profile(private val name: String , private val userid : String , private val emailid : String, private val pass : String) : Fragment() {
+class profile(private val name: String , private val emailid : String) : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null

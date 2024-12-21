@@ -29,12 +29,12 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/userIdEditText"
+                android:id="@+id/emailIdEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/baseline_person_24"
+                android:drawableStart="@drawable/baseline_email_24"
                 android:drawablePadding="5dp"
-                android:hint="User Id"
+                android:hint="Email Id"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,6 +74,16 @@
             android:text="New User ? Sign Up"
             android:textSize="15dp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/forgotPasswordText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password"
+            android:textSize="15dp"
+            android:layout_margin="10dp"
+            android:textStyle="bold"
+            android:gravity="center"/>
 
     </LinearLayout>
 

@@ -90,6 +90,8 @@ class Event : Fragment() {
 
 
 
+
+
                         // Format the timestamps to strings
                         val formattedStartDate = formatTimestampToString(hackathonStartDate)
                         val formattedEndDate = formatTimestampToString(hackathonEndDate)
@@ -108,7 +110,8 @@ class Event : Fragment() {
                             OrganisationName = organisationName,
                             TeamSize = teamSize,
                             HackathonId = Hackthonid,
-                            TotalCount = count
+                            TotalCount = count,
+
                         )
 
 
