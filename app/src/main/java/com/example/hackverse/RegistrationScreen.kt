@@ -1,163 +1,151 @@
 package com.example.hackverse
 
+import DataStoreManager
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.firestore.FirebaseFirestore
+
+import kotlinx.coroutines.launch
 
 class RegistrationScreen : AppCompatActivity() {
 
-
-    private lateinit var nameEditText: EditText
-    private lateinit var emailEditText: EditText
-    private lateinit var hackathonIdEditText: EditText // For example, ID of the hackathon
-    private lateinit var registerButton: Button
-    private lateinit var registerrole: Spinner
-
     private val db = FirebaseFirestore.getInstance()
+    private lateinit var dataStoreManager: DataStoreManager
+    private var teamMemberName = mutableListOf("")
+    private var teamMemberEmail = mutableListOf("")
 
-
-
-
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_registration_screen)
 
+        // Initialize the DataStoreManager
+        dataStoreManager = DataStoreManager(applicationContext)
+
+        // Retrieve data passed via intent
+        val hackathonId = intent.getStringExtra("Hackathonclickedid")
 
 
-        val hackathonid = intent.getStringExtra("Hackathonclickedid")
+        // Get selected hackathon data
+        val teamSize = SelectedHackathon.hackathonData?.TeamSize?.toIntOrNull() ?: 0
+
+        // Launch a coroutine to retrieve data from DataStore
+        lifecycleScope.launch {
+            dataStoreManager.getUserData().collect { userData ->
+                val (name, email, uid) = userData
+                val path = "/Userdata/$uid/team"
+                db.collection(path)
+                    .get()
+                    .addOnCompleteListener() { task ->
+                        if (task.isSuccessful) {
+
+                            val documentSnapshots = task.result // Get the QuerySnapshot result
+                            if (documentSnapshots != null) {
+                                for (i in documentSnapshots) { // Iterate over the list of DocumentSnapshots
+
+                                    val friendname = i.getString("name") ?: ""
+                                    val friendemail = i.getString("email") ?: ""
+                                    teamMemberName.add(friendname)
+                                    teamMemberEmail.add(friendemail)
+                                }
+
+                            }
+                        }
+                    }
 
 
+                val btnregsiter = findViewById<Button>(R.id.regsiter)
+                // Spinner container
+                val spinnerContainer: LinearLayout = findViewById(R.id.registerspinner)
 
+                // Populate spinners dynamically based on team size
+                for (i in 0 until teamSize-1) {
+                    val spinner = Spinner(this@RegistrationScreen)
+                    val adapter = ArrayAdapter(
+                        this@RegistrationScreen,
+                        android.R.layout.simple_list_item_checked,
+                        teamMemberName
+                    )
+                    adapter.setDropDownViewResource(android.R.layout.select_dialog_item)
+                    spinner.adapter = adapter
 
-
-
-
-
-        // Initialize views
-        nameEditText = findViewById(R.id.nameEditText)
-        emailEditText = findViewById(R.id.emailEditText)
-        hackathonIdEditText = findViewById(R.id.hackathonIdEditText)
-        registerButton = findViewById(R.id.registerButton)
-        registerrole = findViewById(R.id.RegisterRole)
-
-
-
-        // Set up the Spinner with roles
-        val roles = listOf("Captain", "Member")
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, roles)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        registerrole.adapter = adapter
-
-
-        // Register button click listener
-        registerButton.setOnClickListener {
-
-                // Get student data from EditText fields
-                val studentName = nameEditText.text.toString()
-                val studentEmail = emailEditText.text.toString()
-                val studentuserid =hackathonIdEditText.text.toString()
-                val selectedRole = registerrole.selectedItem.toString()
-
-
-
-            var registrationCount = 0
-            if (studentName.isEmpty() || studentEmail.isEmpty()) {
-                    Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+                    // Add spinner to the container
+                    spinnerContainer.addView(spinner)
                 }
+                btnregsiter.setOnClickListener{
+                    //created a lostto hold the selected members details
+                    val selectedMembers = mutableListOf<Map<String,String>>()
+                    // Loop through each spinner to get the selected names
+
+                    for (i in 0 until teamSize-1) {
+                        val spinner = spinnerContainer.getChildAt(i) as Spinner
+                        val selectedName = spinner.selectedItem.toString()
+                        val selectedEmail = teamMemberEmail[teamMemberName.indexOf(selectedName)]
 
 
-                // Create a new student registration map
-                val studentdata = hashMapOf(
-                    "userid" to studentuserid,
-                    "name" to studentName,
-                    "email" to studentEmail,
-                    "role" to selectedRole
-                )
-
-            // Reference to the specific hackathon's RegistrationData subcollection
-            val registrationPath = "/AddedHackathonData/$hackathonid/RegisteredStudentData"
-
-                db.collection(registrationPath)
-                    .document(studentuserid)
-                    .set(studentdata)
-                    .addOnSuccessListener {
-                        Toast.makeText(this,"Registration successful!",Toast.LENGTH_SHORT).show()
-                        if (hackathonid != null) {
-                            updateRegistrationCount(hackathonid)
-                        }
-
-                        registrationCount++
-
-                        if (registrationCount < 4) {
-                            clearInputFields()
-                            Toast.makeText(this, "Register the next team member!", Toast.LENGTH_SHORT).show()
-                        } else {
-                            // All members registered, go back to the main screen
-                            Toast.makeText(this, "Team registration completed!", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this, MainScreen1::class.java)
-                            startActivity(intent)
-                        }
-                    }
-                    .addOnFailureListener{ e ->
-                        Toast.makeText(this, "Error registering: ${e.message}", Toast.LENGTH_SHORT).show()
+                        // Add the name and email to the selected members list
+                        selectedMembers.add(mapOf("name" to selectedName, "email" to selectedEmail))
                     }
 
+
+                    selectedMembers.add(0, mapOf("name" to name, "email" to email))
+                    // Store the selected names and emails in Firestore
+                    val teamData = mapOf("teamMembers" to selectedMembers)
+
+                    // Add team data to "RegisteredTeams" in the selected hackathon
+                    db.collection("AddedHackathonData")
+                        .document("$hackathonId")
+                        .collection("RegisteredTeams")
+                        .add(teamData)
+                        .addOnSuccessListener {
+                            Toast.makeText(this@RegistrationScreen, "Registration Successful", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this@RegistrationScreen, MainScreen1::class.java))
+                        }.addOnFailureListener{
+                            Toast.makeText(this@RegistrationScreen, "Registration Failed. Please try again.", Toast.LENGTH_SHORT).show()
+                        }
+                    // Add the hackathon details to the current user's "Participated Hackathon"
+                    db.collection("Userdata")
+                        .document("$uid")
+                        .collection("Participated Hackathon")
+                        .document(hackathonId ?: "")
+                        .set(mapOf("hackathonId" to hackathonId))
+
+                    // Add the hackathon details to each selected team member's "Participated Hackathon"
+
+                    for (member in selectedMembers){
+                        val memberEmail = member["email"] ?: ""
+                        db.collection("Userdata")
+                            .whereEqualTo("email",memberEmail)
+                            .get()
+                            .addOnSuccessListener { querySnapshot ->
+                                val memberDocument = querySnapshot.documents.firstOrNull()
+                                if(memberDocument != null){
+                                    val memberUid = memberDocument.id
+                                    db.collection("Userdata")
+                                        .document(memberUid)
+                                        .collection("Participated Hackathon")
+                                        .document(hackathonId ?:"")
+                                        .set(mapOf("hackathonId" to hackathonId))
+                                }
+                            }
+                            .addOnFailureListener {
+                                Toast.makeText(
+                                    this@RegistrationScreen,
+                                    "Failed to add hackathon for team member: $memberEmail",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                    }
+                }
+            }
         }
     }
-
-    private fun clearInputFields() {
-        nameEditText.text.clear()
-        emailEditText.text.clear()
-        hackathonIdEditText.text.clear()
-    }
-
-    private fun updateRegistrationCount(hackathonid: String) {
-        // Reference to the hackathon document
-        val hackathonRef = db.collection("AddedHackathonData").document(hackathonid)
-
-        // Check if the document exists
-        hackathonRef.get()
-            .addOnSuccessListener { document ->
-                if (document.exists()) {
-                    // Document exists, update the registration count
-                    hackathonRef.update("registrationCount", com.google.firebase.firestore.FieldValue.increment(1))
-                        .addOnSuccessListener {
-                            Toast.makeText(this, "Hackathon registration count updated!", Toast.LENGTH_SHORT).show()
-                        }
-                        .addOnFailureListener { e ->
-                            Toast.makeText(this, "Error updating count: ${e.message}", Toast.LENGTH_SHORT).show()
-                        }
-                } else {
-                    // Document does not exist, create it and initialize registrationCount
-                    hackathonRef.set(hashMapOf("registrationCount" to 1))
-                        .addOnSuccessListener {
-                            Toast.makeText(this, "Hackathon document created and registration count initialized!", Toast.LENGTH_SHORT).show()
-                        }
-                        .addOnFailureListener { e ->
-                            Toast.makeText(this, "Error creating document: ${e.message}", Toast.LENGTH_SHORT).show()
-                        }
-                }
-            }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Error checking document existence: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
-    }
 }
-
-
-
-
-
-

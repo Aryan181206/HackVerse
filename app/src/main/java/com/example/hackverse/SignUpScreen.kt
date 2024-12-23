@@ -8,22 +8,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet.Constraint
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.FirebaseApp
-import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -80,16 +69,11 @@ class SignUpScreen : AppCompatActivity() {
                             firestore.collection("Userdata").document(uid!!)
                                 .set(user)
                                 .addOnSuccessListener {
-                                    Toast.makeText(this, "Account Created", Toast.LENGTH_SHORT)
+                                    Toast.makeText(this, "Account Created ! Now Sign In", Toast.LENGTH_SHORT)
                                         .show()
-
-
                                     // Navigate to MainScreen1
-                                    val intentToMain1 = Intent(this, MainScreen1::class.java)
-                                    intentToMain1.putExtra("name", name)
-                                    intentToMain1.putExtra("uid", uid)
-                                    intentToMain1.putExtra("email", email)
-                                    startActivity(intentToMain1)
+                                    val intentToSignIn = Intent(this, MainScreen1::class.java)
+                                    startActivity(intentToSignIn)
                                 }.addOnFailureListener {
                                     Toast.makeText(
                                         this,

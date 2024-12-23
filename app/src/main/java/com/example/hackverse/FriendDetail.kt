@@ -1,5 +1,6 @@
 package com.example.hackverse
 
+import DataStoreManager
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -8,13 +9,10 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.QuerySnapshot
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.messaging.FirebaseMessaging
-import com.google.firebase.messaging.RemoteMessage
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class FriendDetail : AppCompatActivity() {
 
@@ -36,27 +34,22 @@ class FriendDetail : AppCompatActivity() {
         addButton = findViewById(R.id.add)
 
 
+        val dataStoreManager = DataStoreManager(this)
+        lifecycleScope.launch {
+            val (name, email, uid) = dataStoreManager.getUserData().first()
 
+            addButton.setOnClickListener {
+                val name = friendNameEditText.text.toString()
+                val email = friendEmailEditText.text.toString()
 
-
-        addButton.setOnClickListener {
-            val name = friendNameEditText.text.toString()
-            val email = friendEmailEditText.text.toString()
-
-            if (name.isNotEmpty() && email.isNotEmpty()) {
-
-                val uid = intent.getStringExtra("uiddata") ?: ""
-                if (uid.isEmpty()) {
-                    Toast.makeText(this, "UID is missing", Toast.LENGTH_SHORT).show()
-                    finish() // Close activity if no UID is found
+                if (name.isNotEmpty() && email.isNotEmpty()) {
+                    checkEmailInFirebaseAuth(uid, name, email)
+                } else {
+                    Toast.makeText(this@FriendDetail, "Please enter valid details", Toast.LENGTH_SHORT).show()
                 }
-
-                checkEmailInFirebaseAuth(uid, name, email)
-            } else {
-                Toast.makeText(this, "Please enter valid details", Toast.LENGTH_SHORT).show()
             }
-        }
 
+        }
     }
 
     @SuppressLint("SuspiciousIndentation")
@@ -108,6 +101,11 @@ class FriendDetail : AppCompatActivity() {
             .addOnSuccessListener {
                 Toast.makeText(this, "Friend added to team successfully!", Toast.LENGTH_SHORT)
                     .show()
+
+
+                // Now add the user's data to the friend's team collection
+                addUserToFriendTeam(uid, email)
+
                 val intent = Intent(this, MainScreen1::class.java)
                 startActivity(intent)
             }.addOnFailureListener {
@@ -116,6 +114,75 @@ class FriendDetail : AppCompatActivity() {
                     "Error adding friend to team: ${it.message}",
                     Toast.LENGTH_SHORT
                 ).show()
+            }
+    }
+
+
+    private fun addUserToFriendTeam(uid: String, friendEmail: String) {
+        // Retrieve the user's data
+        val db = FirebaseFirestore.getInstance()
+
+        // Get the user's data from Firestore
+        db.collection("Userdata")
+            .document(uid)
+            .get()
+            .addOnSuccessListener { document ->
+                if(document.exists()){
+                    val userData = document.data
+                    if(userData!=null){
+                        val userName = userData["name"]as? String ?: "Unknown"
+                        val userEmail = userData["email"]as? String ?: "Unknown"
+                        val userTeamData = hashMapOf(
+                            "name" to userName,
+                            "email" to userEmail
+                        )
+                        // Add the user's data to the friend's team collection
+                        val friendEmailDocumentId = friendEmail.replace(".",",")
+                        db.collection("Userdata")
+                            .whereEqualTo("email",friendEmail)
+                            .get()
+                            .addOnSuccessListener { querySnapshot ->
+                                val friendDocument = querySnapshot.documents.firstOrNull()
+                                if (friendDocument !=null) {
+                                    val friendUid = friendDocument.id
+                                    db.collection("Userdata")
+                                        .document(friendUid)
+                                        .collection("team")
+                                        .document(uid)
+                                        .set(userTeamData)
+                                        .addOnSuccessListener {
+                                            Toast.makeText(
+                                                this,
+                                                "Your data added to friend's team successfully!",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }.addOnFailureListener {
+                                            Toast.makeText(
+                                                this,
+                                                "Error adding your data to friend's team: ${it.message}",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                }else{
+                                    Toast.makeText(
+                                        this,
+                                        "Friend not found in Firestore",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+
+                                }
+
+                            }
+
+                    }
+                }
+            }.addOnFailureListener{
+                Toast.makeText(
+                    this,
+                    "Error fetching user data: ${it.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+
             }
     }
 }

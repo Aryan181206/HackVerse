@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("com.google.gms.google-services")
 
+
 }
 
 android {
@@ -71,7 +72,12 @@ android {
         implementation ("com.google.firebase:firebase-dynamic-links:21.1.0")
         implementation ("com.google.firebase:firebase-dynamic-links")
         implementation ("com.google.firebase:firebase-auth:22.1.1")
+        implementation ("androidx.datastore:datastore-preferences:1.0.0")
+        implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
 
+        implementation ("com.google.firebase:firebase-auth:23.1.0")
+        implementation ("com.google.firebase:firebase-firestore:24.7.1")
+        implementation(platform("com.google.firebase:firebase-bom:32.0.0"))
 
     }
 }

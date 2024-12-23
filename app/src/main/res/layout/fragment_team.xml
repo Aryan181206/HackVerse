@@ -23,38 +23,32 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.928" />
 
-        <ImageView
-            android:id="@+id/imageView19"
-            android:layout_width="214dp"
-            android:layout_height="62dp"
-            android:src="@drawable/logohackverse"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.019" />
 
         <TextView
             android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="253dp"
+            android:layout_height="38dp"
+            android:fontFamily="serif-monospace"
             android:text="Your Team"
+            android:textColor="#2F0E42"
+            android:textSize="30sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.092"
+            app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.125" />
-
+            app:layout_constraintVertical_bias="0.086" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_width="385dp"
-            android:layout_height="632dp"
-            android:layout_marginTop="140dp"
+            android:layout_width="384dp"
+            android:layout_height="585dp"
             app:layout_constraintBottom_toTopOf="@+id/addfriend"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.571"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.598" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

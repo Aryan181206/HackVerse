@@ -18,6 +18,9 @@
         android:theme="@style/Theme.HackVerse"
         tools:targetApi="31">
         <activity
+            android:name=".UserParticipation"
+            android:exported="false" />
+        <activity
             android:name=".FriendDetail"
             android:exported="false" />
         <activity
@@ -32,16 +35,7 @@
         <activity
             android:name=".MainScreen1"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.example.com"
-                    android:scheme="https" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".SignInScreen"
@@ -57,6 +51,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

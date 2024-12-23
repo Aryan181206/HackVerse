@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ReportFragment.Companion.reportFragment
 
 
 class HackathonDetailsActivity : AppCompatActivity() {
@@ -34,55 +35,47 @@ class HackathonDetailsActivity : AppCompatActivity() {
         val rewardTextView: TextView = findViewById(R.id.detailReward)
         val teamSizeTextView: TextView = findViewById(R.id.detailTeamSize)
         val totalcountTextView: TextView = findViewById(R.id.detailCount)
-        val reg =findViewById<Button>(R.id.register)
+        val reg : Button = findViewById(R.id.btnregister)
 
 
         //val hackathonImageView: ImageView = findViewById(R.id.detailImageView)
 
 
-        // Get data from intent
-        val title = intent.getStringExtra("HackathonTitle")
-        val organisation = intent.getStringExtra("OrganisationName")
-        val startDate = intent.getStringExtra("StartDate")
-        val endDate = intent.getStringExtra("EndDate")
-        val mode = intent.getStringExtra("HackathonMode")
-        val type = intent.getStringExtra("HackathonType")
-        val reward = intent.getStringExtra("HackathonReward")
-        val teamSize = intent.getStringExtra("TeamSize")
-        val hackathonid = intent.getStringExtra("HackathonId")
-        val totalcount = intent.getStringExtra("TotalCount")
+        val hackathonData = SelectedHackathon.hackathonData
 
         //val imageUrl = intent.getStringExtra("ImageUrl")
 
 
-        reg.setOnClickListener {
+        reg?.setOnClickListener {
             val intent = Intent(this, RegistrationScreen::class.java)
-            intent.putExtra("Hackathonclickedid",hackathonid)  // importent line
+            if (hackathonData != null) {
+                intent.putExtra("Hackathonclickedid", hackathonData.HackathonId)
+            }  // importent line
 
             startActivity(intent)
         }
 
 
-        // Set data to views
-        titleTextView.text = title
-        organisationTextView.text = organisation
-        startDateTextView.text = startDate
-        endDateTextView.text = endDate
-        modeTextView.text = mode
-        typeTextView.text = type
-        rewardTextView.text = reward
-        teamSizeTextView.text = teamSize
-        totalcountTextView.text = totalcount
+        if (hackathonData != null) {
+            // Set data to views
+            titleTextView.text = hackathonData.HackathonTitle
+            organisationTextView.text = hackathonData.OrganisationName
+            startDateTextView.text = hackathonData.HackathonStartDate
+            endDateTextView.text = hackathonData.HackathonEndDate
+            modeTextView.text = hackathonData.HackathonMode
+            typeTextView.text = hackathonData.HackathonType
+            rewardTextView.text = hackathonData.HackathonReward
+            teamSizeTextView.text = hackathonData.TeamSize
+            totalcountTextView.text = hackathonData.TotalCount
 
 
-
-
-        //Glide.with(this)
-          //  .load(imageUrl)
+            //Glide.with(this)
+            //  .load(imageUrl)
             //.placeholder(R.drawable.placeholder)
             //.error(R.drawable.error_image)
             //.into(hackathonImageView)
 
 
+        }
     }
 }

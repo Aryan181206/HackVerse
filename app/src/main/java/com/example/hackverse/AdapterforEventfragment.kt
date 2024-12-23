@@ -37,22 +37,13 @@ class AdapterforEventfragment(private val hackathonList : List<HackathonViewData
                 if (position != RecyclerView.NO_POSITION) {
                     val selectedHackathon = hackathonList[position]
 
+                    // Store the selected hackathon in the singleton
+                    SelectedHackathon.hackathonData = selectedHackathon
                     // Start a new activity with details
-                    val context = itemView.context
-                    val intent = Intent(context, HackathonDetailsActivity::class.java).apply {
-                        putExtra("HackathonTitle", selectedHackathon.HackathonTitle)
-                        putExtra("OrganisationName", selectedHackathon.OrganisationName)
-                        putExtra("StartDate", selectedHackathon.HackathonStartDate)
-                        putExtra("EndDate", selectedHackathon.HackathonEndDate)
-                        putExtra("HackathonMode", selectedHackathon.HackathonMode)
-                        putExtra("HackathonType", selectedHackathon.HackathonType)
-                        putExtra("HackathonReward", selectedHackathon.HackathonReward)
-                        putExtra("TeamSize", selectedHackathon.TeamSize)
-                        putExtra("HackathonId",selectedHackathon.HackathonId)
-                        putExtra("TotalCount",selectedHackathon.TotalCount)
 
-                        //putExtra("ImageUrl", selectedHackathon.imageUrl) // Optional
-                    }
+                    // Navigate to the next activity
+                    val context = itemView.context
+                    val intent = Intent(context, HackathonDetailsActivity::class.java)
                     context.startActivity(intent)
                 }
             }
