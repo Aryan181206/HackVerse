@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="bcColor">#090505</color>
+    <color name="mycolor">#761187</color>
+    <color name="impcolor">#4B0E57</color>
+
+
     <color name="white">#FFFFFFFF</color>
     <color name="Redishpink">#94144F</color>
     <color name="darkpurple">#1C041D</color>

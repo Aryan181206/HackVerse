@@ -43,6 +43,10 @@ class SignUpScreen : AppCompatActivity() {
         val emailUser = findViewById<TextInputEditText>(R.id.etemail)
         val passUser = findViewById<TextInputEditText>(R.id.etpassword)
         val registerButton = findViewById<Button>(R.id.btnCreate)
+        val existingUser = findViewById<TextView>(R.id.tosignin)
+        existingUser.setOnClickListener {
+            val intentExist = Intent(this, SignInScreen::class.java)
+            startActivity(intentExist)
 
         registerButton.setOnClickListener {
             val name = nameUser.text.toString()
@@ -72,7 +76,7 @@ class SignUpScreen : AppCompatActivity() {
                                     Toast.makeText(this, "Account Created ! Now Sign In", Toast.LENGTH_SHORT)
                                         .show()
                                     // Navigate to MainScreen1
-                                    val intentToSignIn = Intent(this, MainScreen1::class.java)
+                                    val intentToSignIn = Intent(this, SignInScreen::class.java)
                                     startActivity(intentToSignIn)
                                 }.addOnFailureListener {
                                     Toast.makeText(
@@ -94,10 +98,7 @@ class SignUpScreen : AppCompatActivity() {
             }
 
 
-            val existingUser = findViewById<TextView>(R.id.tosignin)
-            existingUser.setOnClickListener {
-                val intentExist = Intent(this, SignInScreen::class.java)
-                startActivity(intentExist)
+
             }
 
         }

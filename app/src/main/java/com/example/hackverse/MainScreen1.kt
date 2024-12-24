@@ -24,43 +24,23 @@ class MainScreen1 : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val bottomNavigationbar = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        bottomNavigationbar.selectedItemId = R.id.Dashboard
+        replacewithfragemt(Dashboard())
 
-        // obtaining some profile data from signup screen
-
-        // Access DataStoreManager to retrieve user data
-        val dataStoreManager = DataStoreManager(this)
-        lifecycleScope.launch {
-            val (name, email, uid) = dataStoreManager.getUserData().first()
-
-
-
-            val dashboardfragment = Dashboard()
-
-            val profilefragment = profile()
-
-
-            val bottomNavigationbar = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-            bottomNavigationbar.selectedItemId = R.id.Dashboard
-            replacewithfragemt(Dashboard())
-
-            bottomNavigationbar.setOnItemSelectedListener {
-                when (it.itemId) {
-                    R.id.Team -> replacewithfragemt(team())
-                    R.id.Event -> replacewithfragemt(Event())
-                    R.id.Dashboard -> replacewithfragemt(
-                        Dashboard()
-                    )
-
-                    R.id.Mentorship -> replacewithfragemt(Mentorship())
-                    R.id.Profile -> replacewithfragemt(profile())
-
-                    else -> {
-
+        bottomNavigationbar.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.Team -> replacewithfragemt(team())
+                R.id.Event -> replacewithfragemt(Event())
+                R.id.Dashboard -> replacewithfragemt(Dashboard())
+                R.id.Mentorship -> replacewithfragemt(Mentorship())
+                R.id.Profile -> replacewithfragemt(profile())
+                else -> {
                     }
                 }
                 true
             }
-        }
+
     }
 
         private fun replacewithfragemt(fragment: Fragment) {

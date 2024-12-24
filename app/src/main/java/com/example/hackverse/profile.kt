@@ -39,9 +39,9 @@ class profile() : Fragment() {
             }
 
         }
-        val touserparticipation = view.findViewById<Button>(R.id.toparticipation)
+        val touserparticipation = view.findViewById<CardView>(R.id.toparticipation)
         touserparticipation.setOnClickListener {
-            val intent = Intent(requireContext(), UserParticipation::class.java)
+            val intent = Intent(context, UserParticipation::class.java)
             startActivity(intent)
         }
         return view
