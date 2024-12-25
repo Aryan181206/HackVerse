@@ -11,14 +11,15 @@
 
     <FrameLayout
         android:id="@+id/frame_layout"
-        android:layout_width="412dp"
-        android:layout_height="735dp"
-        android:layout_marginTop="46dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
+        android:layout_marginBottom="121dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView24"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -37,8 +38,8 @@
 
     <ImageView
         android:id="@+id/imageView24"
-        android:layout_width="131dp"
-        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"

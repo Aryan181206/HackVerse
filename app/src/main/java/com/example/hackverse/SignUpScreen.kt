@@ -47,6 +47,7 @@ class SignUpScreen : AppCompatActivity() {
         existingUser.setOnClickListener {
             val intentExist = Intent(this, SignInScreen::class.java)
             startActivity(intentExist)
+        }
 
         registerButton.setOnClickListener {
             val name = nameUser.text.toString()
@@ -104,4 +105,3 @@ class SignUpScreen : AppCompatActivity() {
         }
 
     }
-}

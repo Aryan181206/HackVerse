@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class AdapterforEventfragment(private val hackathonList : List<HackathonViewDataInEventRecycler>):
     RecyclerView.Adapter<AdapterforEventfragment.HackathonViewHolder>() {
@@ -27,10 +30,20 @@ class AdapterforEventfragment(private val hackathonList : List<HackathonViewData
         val typeTextView: TextView = itemView.findViewById(R.id.showtype)
         val rewardTextView: TextView = itemView.findViewById(R.id.showreward)
         val teamSizeTextView: TextView = itemView.findViewById(R.id.showteamsize)
+        val saveHackathonIcon: ImageView = itemView.findViewById(R.id.saveicon)
         //val hackathonImageView: ImageView = itemView.findViewById(R.id.hackathonImageView)
 
 
         init {
+            saveHackathonIcon.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val selectedHackathon = hackathonList[position]
+                    saveHackathonToFirestore(selectedHackathon.HackathonId)
+                }
+            }
+        
+            
             // Set an OnClickListener on the itemView
             itemView.setOnClickListener {
                 val position = adapterPosition
@@ -46,6 +59,31 @@ class AdapterforEventfragment(private val hackathonList : List<HackathonViewData
                     val intent = Intent(context, HackathonDetailsActivity::class.java)
                     context.startActivity(intent)
                 }
+            }
+        }
+
+        private fun saveHackathonToFirestore(hackathonId: String) {
+            val userId = FirebaseAuth.getInstance().currentUser?.uid
+            if (userId != null){
+                val userCollection = FirebaseFirestore.getInstance()
+                    .collection("Userdata")
+                    .document(userId)
+                    .collection("savedHackathons")
+
+                val hackathonData = hashMapOf(
+                    "hackathonId" to hackathonId
+                )
+                userCollection.add(hackathonData)
+                    .addOnSuccessListener {
+                        Toast.makeText(itemView.context, // Access the context from RecyclerView
+                            "Hackathon saved successfully!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }.addOnFailureListener { e->
+                        Toast.makeText(itemView.context,"Failied to save hacakathon ", Toast.LENGTH_SHORT).show()
+                    }
+            }else{
+                Toast.makeText(itemView.context, "User not logged in", Toast.LENGTH_SHORT).show()
             }
         }
     }

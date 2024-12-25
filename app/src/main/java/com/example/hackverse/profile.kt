@@ -44,6 +44,12 @@ class profile() : Fragment() {
             val intent = Intent(context, UserParticipation::class.java)
             startActivity(intent)
         }
+
+        val tosaved = view.findViewById<CardView>(R.id.tosaved)
+        tosaved.setOnClickListener{
+            val intent = Intent(context,savedHackathon::class.java)
+            startActivity(intent)
+        }
         return view
     }
 }

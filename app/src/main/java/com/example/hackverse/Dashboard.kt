@@ -71,8 +71,7 @@ class Dashboard() : Fragment() {
 
 
             // Set up the RecyclerView
-            recyclerView.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = DashboardRV1Adapter(dataList)
             recyclerView.adapter = adapter
 

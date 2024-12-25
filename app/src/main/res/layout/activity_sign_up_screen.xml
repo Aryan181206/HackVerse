@@ -19,13 +19,13 @@
         android:paddingLeft="22dp"
         android:text="&quot;Collaborate,\n Innovate, Dominate!&quot;&#xA;"
         android:textColor="#4B0E57"
-        android:textSize="27dp"
+        android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.291" />
+        app:layout_constraintVertical_bias="0.285" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -36,7 +36,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.118"
+        app:layout_constraintVertical_bias="0.074"
         app:srcCompat="@drawable/logohackverse" />
 
     <androidx.cardview.widget.CardView
