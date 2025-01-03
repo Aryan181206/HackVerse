@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +22,7 @@ import java.util.Locale
 class Event : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var hackathonAdapter: AdapterforEventfragment
+    private val filteredList: MutableList<HackathonViewDataInEventRecycler> = mutableListOf()
     private var hackathonList: MutableList<HackathonViewDataInEventRecycler> = mutableListOf()
 
     private val firestore = FirebaseFirestore.getInstance()
@@ -43,6 +45,7 @@ class Event : Fragment() {
 
         Log.d("HackathonData", "Data fetched: $hackathonList")
         recyclerView = view.findViewById(R.id.RVinEventScreen)
+        val searchView = view.findViewById<SearchView>(R.id.searchview)
 
 
         //fetch data from firestore
@@ -51,6 +54,7 @@ class Event : Fragment() {
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         hackathonAdapter = AdapterforEventfragment(hackathonList)
+        hackathonAdapter = AdapterforEventfragment(filteredList)
         recyclerView.adapter = hackathonAdapter
 
 
@@ -59,6 +63,17 @@ class Event : Fragment() {
             val intent = Intent(activity, AddNewHackathonScreen::class.java)
             startActivity(intent)
         }
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let { filterHackathons(it) }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let { filterHackathons(it) }
+                return true
+            }
+        })
 
 
 
@@ -85,6 +100,7 @@ class Event : Fragment() {
                         val organisationName = document.getString("OrganisationName") ?: ""
                         val teamSize = document.getString("TeamSize") ?: ""
                         val totalcount = document.getLong("registrationCount")
+                        val likecount = document.getLong("likeCount").toString()
 
                         var count =totalcount.toString()
 
@@ -111,6 +127,8 @@ class Event : Fragment() {
                             TeamSize = teamSize,
                             HackathonId = Hackthonid,
                             TotalCount = count,
+                            likeCount = likecount
+
 
                         )
 
@@ -118,6 +136,7 @@ class Event : Fragment() {
                         hackathonList.add(hackathon)
                     }
 
+                    filteredList.addAll(hackathonList)
                     hackathonAdapter.notifyDataSetChanged() // Notify adapter that data has changed
                 }
             }
@@ -141,5 +160,14 @@ class Event : Fragment() {
                 return dateFormat.format(date)
             }
         }
+    private fun filterHackathons(query: String) {
+        val searchQuery = query.lowercase(Locale.getDefault())
+        filteredList.clear()
+        filteredList.addAll(hackathonList.filter {
+            it.HackathonTitle.lowercase(Locale.getDefault()).contains(searchQuery)
+        })
+        hackathonAdapter.notifyDataSetChanged()
     }
+
+}
 

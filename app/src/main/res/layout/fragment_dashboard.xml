@@ -13,174 +13,224 @@
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
-            android:layout_width="376dp"
-            android:layout_height="36dp"
-            app:cardBackgroundColor="@color/light_gray"
-            app:cardCornerRadius="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.444"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.018"
-            tools:ignore="MissingConstraints">
-
-            <SearchView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-
-                android:gravity="center"
-
-                />
-
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
             android:id="@+id/cardviewprofile"
-            android:layout_width="383dp"
-            android:layout_height="132dp"
-            android:layout_margin="20dp"
-            android:layout_marginTop="140dp"
-
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            android:layout_marginHorizontal="20dp"
             app:cardCornerRadius="25dp"
             app:cardElevation="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.36"
+            app:layout_constraintHorizontal_bias="0.487"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.145"
+            tools:ignore="MissingConstraints">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp">
+                android:background="@drawable/img_30">
 
 
                 <TextView
                     android:id="@+id/nametv"
-                    android:layout_width="105dp"
-                    android:layout_height="24dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:fontFamily="serif-monospace"
                     android:gravity="left"
-                    android:text="WELCOME"
+                    android:paddingStart="120dp"
+                    android:text="WELCOME \nTO THE WORLD \nOF HACKATHONS"
                     android:textColor="@color/darkishBlue"
-                    android:textSize="20dp"
+                    android:textSize="25dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.055"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.074" />
+                    app:layout_constraintVertical_bias="0.082" />
 
                 <TextView
 
-                    android:layout_width="322dp"
-                    android:layout_height="43dp"
-                    android:fontFamily="serif-monospace"
+                    android:layout_width="257dp"
+                    android:layout_height="119dp"
+                    android:fontFamily="@font/acme"
                     android:gravity="left"
                     android:text="\tCode,\n\tCreate,Conquer!"
                     android:textColor="@color/darkishBlue"
-                    android:textSize="18dp"
+                    android:textSize="38dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.272"
+                    app:layout_constraintHorizontal_bias="0.161"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.829" />
+                    app:layout_constraintVertical_bias="0.816" />
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="80dp"
-                    android:layout_height="78dp"
-                    android:src="@drawable/profile"
+                    android:layout_width="103dp"
+                    android:layout_height="98dp"
+                    android:src="@drawable/roboface"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.868"
+                    app:layout_constraintHorizontal_bias="0.066"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.271" />
+                    app:layout_constraintVertical_bias="0.086" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="229dp"
+                    android:layout_height="112dp"
+                    android:src="@drawable/coderbc"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
 
                 <TextView
                     android:id="@+id/showname"
-                    android:layout_width="258dp"
-                    android:layout_height="26dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:fontFamily="serif-monospace"
                     android:gravity="left"
+                    android:paddingStart="115dp"
                     android:text="Aryan Sharma"
-                    android:textColor="@color/darkishBlue"
-                    android:textSize="20dp"
+                    android:textColor="@color/black"
+                    android:textSize="30dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.121"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.261" />
+                    app:layout_constraintVertical_bias="0.414" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/addfriend"
+            android:layout_width="192dp"
+            android:layout_height="65dp"
+            android:layout_marginStart="36dp"
+            android:backgroundTint="#C4B5E6"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/cardView16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardviewprofile"
+            app:layout_constraintVertical_bias="0.829">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:text="Make Team"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+
+                />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView16"
+            android:layout_width="192dp"
+            android:layout_height="65dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="150dp"
+            android:backgroundTint="#A7DCB2"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/imageView15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.245"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardviewprofile"
+            app:layout_constraintVertical_bias="0.778">
+
+            <TextView
+                android:id="@+id/textView30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add \nHackathon"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="7dp"
+                android:layout_gravity="right"/>
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/imageView15"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="5dp"
+            android:layout_height="110dp"
+            android:src="@drawable/bc"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.512"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.841" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/beMentor"
+            android:layout_width="117dp"
+            android:layout_height="150dp"
+            android:backgroundTint="#58BFB5"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/imageView15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.375"
+
+            app:layout_constraintStart_toEndOf="@+id/cardView16"
+            app:layout_constraintTop_toBottomOf="@+id/cardviewprofile"
+            app:layout_constraintVertical_bias="0.653">
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="Become\n Mentor"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+
+                />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+
+            android:layout_width="413dp"
+            android:layout_height="46dp"
+            android:fontFamily="@font/acme"
+            android:paddingStart="35dp"
+            android:text="&quot;Unleash Your Inner Coder!&quot;&#xA;"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/addfriend"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.403">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerviewindashboard"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:background="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.45"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.548">
-
-
-            </androidx.recyclerview.widget.RecyclerView>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="225dp"
-            android:layout_height="42dp"
-            android:fontFamily="serif-monospace"
-            android:gravity="center"
-            android:text="Active Events"
-            android:textColor="@color/darkpurple"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardviewprofile"
-            app:layout_constraintVertical_bias="0.6" />
+            app:layout_constraintVertical_bias="0.904" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </FrameLayout>

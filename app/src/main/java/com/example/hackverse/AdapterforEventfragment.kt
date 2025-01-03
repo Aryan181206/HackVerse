@@ -31,10 +31,13 @@ class AdapterforEventfragment(private val hackathonList : List<HackathonViewData
         val rewardTextView: TextView = itemView.findViewById(R.id.showreward)
         val teamSizeTextView: TextView = itemView.findViewById(R.id.showteamsize)
         val saveHackathonIcon: ImageView = itemView.findViewById(R.id.saveicon)
+        val likeHackathonIcon: ImageView = itemView.findViewById(R.id.likeicon) // New like icon
+
         //val hackathonImageView: ImageView = itemView.findViewById(R.id.hackathonImageView)
 
 
         init {
+            // Save Hackathon Icon Click
             saveHackathonIcon.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
@@ -42,8 +45,17 @@ class AdapterforEventfragment(private val hackathonList : List<HackathonViewData
                     saveHackathonToFirestore(selectedHackathon.HackathonId)
                 }
             }
-        
-            
+
+            // Like Hackathon Icon Click
+            likeHackathonIcon.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val selectedHackathon = hackathonList[position]
+                    likeHackathon(selectedHackathon)
+                }
+            }
+
+
             // Set an OnClickListener on the itemView
             itemView.setOnClickListener {
                 val position = adapterPosition
@@ -64,31 +76,82 @@ class AdapterforEventfragment(private val hackathonList : List<HackathonViewData
 
         private fun saveHackathonToFirestore(hackathonId: String) {
             val userId = FirebaseAuth.getInstance().currentUser?.uid
-            if (userId != null){
+            if (userId != null) {
                 val userCollection = FirebaseFirestore.getInstance()
                     .collection("Userdata")
                     .document(userId)
                     .collection("savedHackathons")
 
+
                 val hackathonData = hashMapOf(
                     "hackathonId" to hackathonId
                 )
-                userCollection.add(hackathonData)
+                userCollection.document(hackathonId).set(hackathonData)
                     .addOnSuccessListener {
-                        Toast.makeText(itemView.context, // Access the context from RecyclerView
+                        Toast.makeText(
+                            itemView.context, // Access the context from RecyclerView
                             "Hackathon saved successfully!",
                             Toast.LENGTH_SHORT
                         ).show()
-                    }.addOnFailureListener { e->
-                        Toast.makeText(itemView.context,"Failied to save hacakathon ", Toast.LENGTH_SHORT).show()
+                    }.addOnFailureListener { e ->
+                        Toast.makeText(
+                            itemView.context,
+                            "Failied to save hacakathon ",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
-            }else{
+            } else {
                 Toast.makeText(itemView.context, "User not logged in", Toast.LENGTH_SHORT).show()
             }
         }
+
+        private fun likeHackathon(hackathon: HackathonViewDataInEventRecycler) {
+            val firestore = FirebaseFirestore.getInstance()
+            val hackathonRef =
+                firestore.collection("AddedHackathonData").document(hackathon.HackathonId)
+
+            // Update like count in AddedHackathondata
+            hackathonRef.get().addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val currentLikes = document.getLong("likeCount") ?: 0
+                    hackathonRef.update("likeCount", currentLikes + 1)
+                } else {
+                    hackathonRef.set(mapOf("likeCount" to 1))
+                }
+            }
+            // Save Liked Hackathon to Userdata
+            val userId = FirebaseAuth.getInstance().currentUser?.uid
+            if (userId != null) {
+                val likedHackathonsRef = firestore.collection("Userdata")
+                    .document(userId)
+                    .collection("Liked Hackathons")
+
+                val likedHackathonData = hashMapOf(
+                    "hackathonId" to hackathon.HackathonId,
+                    "hackathonTitle" to hackathon.HackathonTitle,
+                    "organisation" to hackathon.OrganisationName
+                )
+
+                likedHackathonsRef.document(hackathon.HackathonId).set(likedHackathonData)
+                    .addOnSuccessListener {
+                        Toast.makeText(
+                            itemView.context,
+                            "Hackathon UpVoted",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(
+                            itemView.context,
+                            "Failed to like hackathon",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+
+            }
+        }
     }
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HackathonViewHolder {
         // Inflate the layout for each item in the RecyclerView

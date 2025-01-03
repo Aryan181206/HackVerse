@@ -59,7 +59,9 @@ class savedHackathon : AppCompatActivity() {
     }
 
     private fun fetchHackathonDetails(hackathonId: String) {
-        firestore.collection("AddedHackathonData").document(hackathonId)
+        firestore
+            .collection("AddedHackathonData")
+            .document(hackathonId)
             .get()
             .addOnSuccessListener {
                     document ->

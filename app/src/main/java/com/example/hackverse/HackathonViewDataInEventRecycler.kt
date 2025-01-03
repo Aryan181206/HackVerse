@@ -15,5 +15,6 @@ data class HackathonViewDataInEventRecycler(
     val TeamSize: String = "",
     val HackathonId : String ="",
     val TotalCount : String="",
+    val likeCount : String=""
 
 )

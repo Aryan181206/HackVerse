@@ -9,8 +9,10 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
 import kotlinx.coroutines.launch
@@ -62,16 +64,18 @@ class RegistrationScreen : AppCompatActivity() {
                     }
 
 
+
+
                 val btnregsiter = findViewById<Button>(R.id.regsiter)
                 // Spinner container
                 val spinnerContainer: LinearLayout = findViewById(R.id.registerspinner)
 
                 // Populate spinners dynamically based on team size
-                for (i in 0 until teamSize-1) {
+                for (i in 0 until teamSize - 1) {
                     val spinner = Spinner(this@RegistrationScreen)
                     val adapter = ArrayAdapter(
                         this@RegistrationScreen,
-                        android.R.layout.simple_list_item_checked,
+                        android.R.layout.simple_list_item_1,
                         teamMemberName
                     )
                     adapter.setDropDownViewResource(android.R.layout.select_dialog_item)
@@ -80,12 +84,12 @@ class RegistrationScreen : AppCompatActivity() {
                     // Add spinner to the container
                     spinnerContainer.addView(spinner)
                 }
-                btnregsiter.setOnClickListener{
+                btnregsiter.setOnClickListener {
                     //created a lostto hold the selected members details
-                    val selectedMembers = mutableListOf<Map<String,String>>()
+                    val selectedMembers = mutableListOf<Map<String, String>>()
                     // Loop through each spinner to get the selected names
 
-                    for (i in 0 until teamSize-1) {
+                    for (i in 0 until teamSize - 1) {
                         val spinner = spinnerContainer.getChildAt(i) as Spinner
                         val selectedName = spinner.selectedItem.toString()
                         val selectedEmail = teamMemberEmail[teamMemberName.indexOf(selectedName)]
@@ -106,11 +110,45 @@ class RegistrationScreen : AppCompatActivity() {
                         .collection("RegisteredTeams")
                         .add(teamData)
                         .addOnSuccessListener {
-                            Toast.makeText(this@RegistrationScreen, "Registration Successful", Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(this@RegistrationScreen, MainScreen1::class.java))
-                        }.addOnFailureListener{
-                            Toast.makeText(this@RegistrationScreen, "Registration Failed. Please try again.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this@RegistrationScreen,
+                                "Registration Successful ! Please Give feedback",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            // Update the registration count of the selected hackathon
+                            db.collection("AddedHackathonData")
+                                .document("$hackathonId")
+                                .update(
+                                    "registrationCount",
+                                    FieldValue.increment(teamSize.toLong())
+                                )
+                                .addOnSuccessListener {
+                                    Toast.makeText(
+                                        this@RegistrationScreen,
+                                        "Registration count updated!",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                                .addOnFailureListener { e ->
+                                    Toast.makeText(
+                                        this@RegistrationScreen,
+                                        "Failed to update registration count: $e",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+
+                            // Registration successful, show a congratulatory dialog
+                            showCongratulationsDialog()
+
+                        }.addOnFailureListener {
+                            Toast.makeText(
+                                this@RegistrationScreen,
+                                "Registration Failed. Please try again.",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
+
+
                     // Add the hackathon details to the current user's "Participated Hackathon"
                     db.collection("Userdata")
                         .document("$uid")
@@ -120,19 +158,19 @@ class RegistrationScreen : AppCompatActivity() {
 
                     // Add the hackathon details to each selected team member's "Participated Hackathon"
 
-                    for (member in selectedMembers){
+                    for (member in selectedMembers) {
                         val memberEmail = member["email"] ?: ""
                         db.collection("Userdata")
-                            .whereEqualTo("email",memberEmail)
+                            .whereEqualTo("email", memberEmail)
                             .get()
                             .addOnSuccessListener { querySnapshot ->
                                 val memberDocument = querySnapshot.documents.firstOrNull()
-                                if(memberDocument != null){
+                                if (memberDocument != null) {
                                     val memberUid = memberDocument.id
                                     db.collection("Userdata")
                                         .document(memberUid)
                                         .collection("Participated Hackathon")
-                                        .document(hackathonId ?:"")
+                                        .document(hackathonId ?: "")
                                         .set(mapOf("hackathonId" to hackathonId))
                                 }
                             }
@@ -148,4 +186,26 @@ class RegistrationScreen : AppCompatActivity() {
             }
         }
     }
+
+    private fun showCongratulationsDialog() {
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder.setTitle("Congratulations! You Registered Successfully")
+            .setMessage("You have successfully registered for the hackathon.")
+            .setCancelable(false)
+            .setPositiveButton("Give Feedback") { dialog, id ->
+                // Navigate to the feedback screen when "Give Feedback" is clicked
+                val intent = Intent(this@RegistrationScreen, feedbackscreen::class.java)
+                startActivity(intent)
+            }
+            .setNegativeButton("Close") { dialog, id ->
+                // Close the dialog
+                dialog.dismiss()
+                startActivity(Intent(this@RegistrationScreen, MainScreen1::class.java))
+            }
+
+        // Create the AlertDialog and show it
+        val alert = dialogBuilder.create()
+        alert.show()
+    }
+
 }

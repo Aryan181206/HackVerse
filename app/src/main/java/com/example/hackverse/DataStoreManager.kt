@@ -23,6 +23,14 @@ class DataStoreManager(context: Context) {
             preferences[UID_KEY] = uid
         }
     }
+    // Function to clear user data
+    suspend fun clearUserData() {
+        dataStore.edit { preferences ->
+            preferences.remove(NAME_KEY)
+            preferences.remove(EMAIL_KEY)
+            preferences.remove(UID_KEY)
+        }
+    }
 
     fun getUserData() = dataStore.data.map { preferences ->
         Triple(

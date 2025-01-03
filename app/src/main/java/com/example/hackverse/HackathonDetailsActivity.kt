@@ -29,12 +29,15 @@ class HackathonDetailsActivity : AppCompatActivity() {
         val titleTextView: TextView = findViewById(R.id.detailTitle)
         val organisationTextView: TextView = findViewById(R.id.detailOrganisation)
         val startDateTextView: TextView = findViewById(R.id.detailStartDate)
+        val startDateTextView2: TextView = findViewById(R.id.detailstartDate2)
         val endDateTextView: TextView = findViewById(R.id.detailEndDate)
         val modeTextView: TextView = findViewById(R.id.detailMode)
         val typeTextView: TextView = findViewById(R.id.detailType)
         val rewardTextView: TextView = findViewById(R.id.detailReward)
         val teamSizeTextView: TextView = findViewById(R.id.detailTeamSize)
         val totalcountTextView: TextView = findViewById(R.id.detailCount)
+        val likecountTextView: TextView = findViewById(R.id.detaillikecount)
+
         val reg : Button = findViewById(R.id.btnregister)
 
 
@@ -44,6 +47,7 @@ class HackathonDetailsActivity : AppCompatActivity() {
         val hackathonData = SelectedHackathon.hackathonData
 
         //val imageUrl = intent.getStringExtra("ImageUrl")
+
 
 
         reg?.setOnClickListener {
@@ -61,20 +65,14 @@ class HackathonDetailsActivity : AppCompatActivity() {
             titleTextView.text = hackathonData.HackathonTitle
             organisationTextView.text = hackathonData.OrganisationName
             startDateTextView.text = hackathonData.HackathonStartDate
+            startDateTextView2.text = hackathonData.HackathonStartDate
             endDateTextView.text = hackathonData.HackathonEndDate
             modeTextView.text = hackathonData.HackathonMode
             typeTextView.text = hackathonData.HackathonType
             rewardTextView.text = hackathonData.HackathonReward
             teamSizeTextView.text = hackathonData.TeamSize
             totalcountTextView.text = hackathonData.TotalCount
-
-
-            //Glide.with(this)
-            //  .load(imageUrl)
-            //.placeholder(R.drawable.placeholder)
-            //.error(R.drawable.error_image)
-            //.into(hackathonImageView)
-
+            likecountTextView.text = hackathonData.likeCount
 
         }
     }
