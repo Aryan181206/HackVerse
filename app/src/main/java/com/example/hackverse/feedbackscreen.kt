@@ -1,6 +1,7 @@
 package com.example.hackverse
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -41,9 +42,8 @@ class feedbackscreen : AppCompatActivity() {
                     "HackathonId" to hackathon?.HackathonId,
                     "HackathonName" to hackathon?.HackathonTitle,
                     "OrganisationName" to hackathon?.OrganisationName,
-                    "feedback" to feedbackText
+                    "feedback" to feedbackText)
 
-                )
                 firestore.collection("Userdata")
                     .document(userId)
                     .collection("feedbacks")
@@ -51,7 +51,9 @@ class feedbackscreen : AppCompatActivity() {
                     .addOnSuccessListener {
                         Toast.makeText(this, "Feedback submitted successfully", Toast.LENGTH_SHORT)
                             .show()
-                        feedtext.text.clear() // Clear the input after submission  }
+                        feedtext.text.clear()
+                        val intent = Intent(this@feedbackscreen,MainScreen1::class.java)
+                        startActivity(intent)
                     }
                     .addOnFailureListener{
                         Toast.makeText(this,"Failed to submit feedback",Toast.LENGTH_SHORT).show()

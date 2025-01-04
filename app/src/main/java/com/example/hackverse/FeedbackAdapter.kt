@@ -33,8 +33,8 @@ class FeedbackAdapter : RecyclerView.Adapter<FeedbackAdapter.FeedbackViewHolder>
         private val feedbackTextView: TextView = itemView.findViewById(R.id.showfeedback)
 
         fun bind(feedback: Feedbackdata) {
-            titleTextView.text = "Title: ${feedback.HackathonName}"
-            organizationTextView.text = "Organization: ${feedback.OrganisationName}"
+            titleTextView.text = feedback.HackathonName
+            organizationTextView.text = feedback.OrganisationName
             feedbackTextView.text = "Feedback: ${feedback.feedback}"
                    }
     }

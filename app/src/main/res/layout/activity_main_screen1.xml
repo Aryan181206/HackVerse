@@ -28,6 +28,7 @@
         app:elevation="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#EAEAEA"
         app:itemIconSize="30dp"
         app:itemIconTint="@color/darkpurple"
         app:itemTextColor="@color/darkpurple"
