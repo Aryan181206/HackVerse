@@ -103,6 +103,7 @@ class SignInScreen : AppCompatActivity() {
                             }
                             Toast.makeText(this, "Sign-In Successful", Toast.LENGTH_SHORT).show()
                             startActivity(Intent(this, MainScreen1::class.java))
+                            finish()
                         }
                         .addOnFailureListener {
                             Toast.makeText(this, "Failed to fetch user data", Toast.LENGTH_SHORT).show()

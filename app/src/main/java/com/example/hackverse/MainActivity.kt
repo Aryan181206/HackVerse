@@ -1,12 +1,17 @@
 package com.example.hackverse
 
+import DataStoreManager
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,11 +24,20 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         supportActionBar?.hide()
-        Handler().postDelayed({
-            val intent = Intent(this, SignInScreen::class.java)
-            startActivity(intent)
-            finish()
-
-        },3000)
+        val dataStoreManager = DataStoreManager(this)
+        // Add a 3-second delay before checking user data
+        Handler(Looper.getMainLooper()).postDelayed({
+            lifecycleScope.launch {
+                val userdata = dataStoreManager.getUserData().first()
+                val userId = userdata.third
+                val intent = if (userId.isEmpty()) {
+                    Intent(this@MainActivity, SignInScreen::class.java)
+                } else {
+                    Intent(this@MainActivity, MainScreen1::class.java)
+                }
+                startActivity(intent)
+                finish()
+            }
+        }, 3000) // 3000ms = 3 seconds
     }
 }

@@ -26,9 +26,7 @@ class DataStoreManager(context: Context) {
     // Function to clear user data
     suspend fun clearUserData() {
         dataStore.edit { preferences ->
-            preferences.remove(NAME_KEY)
-            preferences.remove(EMAIL_KEY)
-            preferences.remove(UID_KEY)
+            preferences.clear()
         }
     }
 

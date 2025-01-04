@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-
+    android:background="@drawable/img_29"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SignUpScreen">
@@ -25,7 +25,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.285" />
+        app:layout_constraintVertical_bias="0.233" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -55,10 +55,9 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="20dp"
-
-
+            android:paddingHorizontal="10dp"
+            android:paddingTop="20dp"
+            android:background="@drawable/img_30"
             android:orientation="vertical">
 
 
@@ -147,6 +146,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="serif-monospace"
                 android:gravity="center"
+                android:textColor="@color/black"
                 android:text="Already Registered?\n Sign In"
                 android:textSize="20dp"
                 android:textStyle="bold" />
