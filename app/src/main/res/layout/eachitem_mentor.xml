@@ -16,9 +16,10 @@
 
         <TextView
             android:id="@+id/mentorExperience"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="4"
+            android:paddingStart="114dp"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -30,9 +31,10 @@
 
         <TextView
             android:id="@+id/textView27"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=" years experience"
+            android:paddingStart="120dp"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -44,9 +46,9 @@
 
         <TextView
             android:id="@+id/mentorDomain"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="7dp"
+            android:paddingStart="110dp"
             android:text=" Business and Management"
             android:textColor="@color/black"
             android:textSize="17dp"

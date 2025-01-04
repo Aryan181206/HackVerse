@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:background="@drawable/bg11"
+    android:background="@drawable/img_29"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FriendDetail">
@@ -30,7 +30,7 @@
     <ImageView
         android:id="@+id/imageView20"
         android:layout_width="match_parent"
-        android:layout_height="51dp"
+        android:layout_height="59dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@+id/textView28"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/abril_fatface"
-        android:paddingStart="20dp"
+        android:paddingStart="30dp"
         android:text="Enter Details To Add"
         android:textColor="@color/black"
         android:textSize="25dp"
@@ -63,7 +63,6 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_margin="10dp"
-        android:backgroundTint="#830B86"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,8 +74,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:background="#99D5E8">
+            android:background="@drawable/img_30"
+          >
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout"
@@ -95,6 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    android:textStyle="bold"
                     android:hint="Enter Friend Name" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -114,6 +114,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    android:textStyle="bold"
                     android:hint="Enter Friend Email" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -123,6 +124,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="#4B1070"
                 android:text="Add"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"

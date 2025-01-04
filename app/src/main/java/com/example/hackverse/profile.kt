@@ -87,6 +87,9 @@ class profile() : Fragment() {
     }
 
     private fun logoutFromFirebase() {
+        if (!::firebaseAuth.isInitialized) {
+            firebaseAuth = FirebaseAuth.getInstance()
+        }
         //Perform Firebase logout
         firebaseAuth.signOut()
 

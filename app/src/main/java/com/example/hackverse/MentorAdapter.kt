@@ -20,9 +20,9 @@ class MentorAdapter(private var mentorList: List<MentorData>) :
         //private val contactTextView: TextView = itemView.findViewById(R.id.mentorContact)
 
         fun bind(mentor: MentorData) {
-            nameTextView.text = "Name: ${mentor.name}"
-            experienceTextView.text = "Experience: ${mentor.workExperience} years"
-            domainTextView.text = "Domain: ${mentor.industry}"
+            nameTextView.text = mentor.name
+            experienceTextView.text = mentor.workExperience
+            domainTextView.text = mentor.industry
             //emailTextView.text = "Email: ${mentor.email}"
             //headlineTextView.text = "Headline: ${mentor.headline}"
             //contactTextView.text = "Contact: ${mentor.contact}"

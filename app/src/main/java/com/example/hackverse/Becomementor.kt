@@ -59,7 +59,23 @@ class Becomementor : AppCompatActivity() {
         setupSpinner(
             domainSpinner,
             "Select Industry",
-            listOf("Technology", "Finance", "Healthcare", "Education")
+            listOf(
+                "Technology",
+                "Finance",
+                "Healthcare",
+                "Education",
+                "Manufacturing",
+                "Retail and E-commerce",
+                "Hospitality and Tourism",
+                "Energy and Utilities",
+                "Media and Entertainment",
+                "Telecommunications",
+                "Real Estate",
+                "Agriculture and Food Production",
+                "Aerospace and Defense",
+                "Automotive",
+                "Fashion and Apparel",
+                "Sports and Recreation")
         )
         setupSpinner(
             languageSpinner,

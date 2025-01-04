@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/img_29"
     tools:context=".Becomementor">
 
     <ImageView
@@ -23,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Become a Mentor"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.045"
@@ -36,6 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Enter your Details"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.046"
@@ -56,7 +59,8 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#D9D9D9">
 
 
 
@@ -72,6 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:textColor="@color/black"
                 android:text="Full Name " />
 
             <EditText
@@ -80,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:ems="10"
+                android:textColor="@color/black"
                 android:hint="Your Name"
                 android:inputType="text" />
             <TextView
@@ -87,6 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:textColor="@color/black"
                 android:text="Email " />
             <EditText
                 android:id="@+id/email"
@@ -94,12 +101,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:ems="10"
+                android:textColor="@color/black"
                 android:inputType="textEmailAddress" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:textColor="@color/black"
                 android:text="Contact No. " />
             <EditText
                 android:id="@+id/contact"
@@ -107,6 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:ems="10"
+                android:textColor="@color/black"
                 android:hint="9140225202"
                 android:inputType="number" />
 
@@ -115,22 +125,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:textColor="@color/black"
                 android:text="Gender" />
 
             <Spinner
                 android:id="@+id/gender"
                 android:layout_width="match_parent"
+                android:textColor="@color/black"
                 android:layout_height="45dp"
                 android:layout_marginHorizontal="10dp" />
 
             <TextView
-
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="Current Organisation/Institute" />
 
             <EditText
+                android:textColor="@color/black"
                 android:id="@+id/currentorganisation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -140,24 +153,28 @@
                 android:inputType="text" />
 
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="Industry" />
 
             <Spinner
+                android:textColor="@color/black"
                 android:id="@+id/domain"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginHorizontal="10dp" />
 
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="Work Experience" />
 
             <EditText
+                android:textColor="@color/black"
                 android:id="@+id/WorkExperience"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -167,12 +184,14 @@
                 android:text="5 years" />
 
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="Headline" />
 
             <EditText
+                android:textColor="@color/black"
                 android:id="@+id/Headline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -188,12 +207,14 @@
                 android:text="Language You're fluent in" />
 
             <Spinner
+                android:textColor="@color/black"
                 android:id="@+id/language"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginHorizontal="10dp" />
 
             <Button
+                android:textColor="@color/black"
                 android:id="@+id/Submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
