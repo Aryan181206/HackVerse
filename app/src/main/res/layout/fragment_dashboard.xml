@@ -16,7 +16,7 @@
             android:id="@+id/cardviewprofile"
             android:layout_width="match_parent"
             android:layout_height="320dp"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginHorizontal="15dp"
             app:cardCornerRadius="25dp"
             app:cardElevation="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -70,15 +70,15 @@
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="103dp"
-                    android:layout_height="98dp"
+                    android:layout_width="115dp"
+                    android:layout_height="110dp"
                     android:src="@drawable/roboface"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.066"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.086" />
+                    app:layout_constraintVertical_bias="0.09" />
 
                 <ImageView
                     android:id="@+id/imageView6"
@@ -108,7 +108,7 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.414" />
+                    app:layout_constraintVertical_bias="0.384" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -123,21 +123,23 @@
             android:backgroundTint="#C4B5E6"
             app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toTopOf="@+id/cardView16"
+            app:layout_constraintEnd_toStartOf="@+id/beMentor"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardviewprofile"
-            app:layout_constraintVertical_bias="0.829">
+            app:layout_constraintVertical_bias="0.827">
 
 
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="right"
+                android:layout_gravity="center"
                 android:layout_marginRight="5dp"
                 android:gravity="center"
                 android:text="Make Team"
                 android:textColor="@color/black"
-                android:textSize="20dp"
+                android:textSize="25dp"
                 android:textStyle="bold"
 
                 />
@@ -153,23 +155,22 @@
             app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toTopOf="@+id/imageView15"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.245"
+            app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardviewprofile"
-            app:layout_constraintVertical_bias="0.778">
+            app:layout_constraintVertical_bias="0.808">
 
             <TextView
                 android:id="@+id/textView30"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add \nHackathon"
-                android:textSize="20dp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:gravity="center"
+                android:layout_gravity="center"
                 android:layout_marginRight="5dp"
-                android:layout_marginTop="7dp"
-                android:layout_gravity="right"/>
+                android:gravity="center"
+                android:text="Add \nHackathon"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
 
         <ImageView
@@ -187,16 +188,16 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/beMentor"
             android:layout_width="117dp"
-            android:layout_height="150dp"
+            android:layout_height="147dp"
             android:backgroundTint="#58BFB5"
             app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toTopOf="@+id/imageView15"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.375"
+            app:layout_constraintHorizontal_bias="0.26"
 
             app:layout_constraintStart_toEndOf="@+id/cardView16"
             app:layout_constraintTop_toBottomOf="@+id/cardviewprofile"
-            app:layout_constraintVertical_bias="0.653">
+            app:layout_constraintVertical_bias="0.692">
 
             <TextView
                 android:id="@+id/textView29"
@@ -211,6 +212,14 @@
                 android:textStyle="bold"
 
                 />
+
+            <ImageView
+                android:id="@+id/imageView29"
+                android:layout_width="65dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/img_37" />
         </androidx.cardview.widget.CardView>
 
         <TextView

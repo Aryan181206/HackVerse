@@ -124,6 +124,7 @@
                 android:gravity="center_vertical"
                 android:paddingStart="20dp"
                 android:text="Name :"
+                android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -135,6 +136,7 @@
                 android:gravity="center_vertical"
                 android:paddingStart="100dp"
                 android:text="Aryan Sharma "
+                android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -161,6 +163,7 @@
                 android:gravity="center_vertical"
                 android:paddingStart="20dp"
                 android:text="Email Id : "
+                android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -171,6 +174,7 @@
                 android:layout_gravity="center_vertical"
                 android:fontFamily="serif-monospace"
                 android:gravity="center_vertical"
+                android:textColor="@color/black"
                 android:paddingStart="112dp"
                 android:text="aryansharma181206@gmail.com"
                 android:textSize="18dp"

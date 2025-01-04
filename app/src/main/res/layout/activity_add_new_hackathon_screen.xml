@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:orientation="vertical"
-android:background="@drawable/bg"
+android:background="@drawable/img_29"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddNewHackathonScreen">
@@ -40,7 +40,7 @@ android:background="@drawable/bg"
         android:fontFamily="serif-monospace"
         android:text="Enter Details"
         android:textSize="20dp"
-        android:textStyle="" />
+        android:textStyle="bold" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
