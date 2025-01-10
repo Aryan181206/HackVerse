@@ -50,7 +50,7 @@ class HackathonDetailsActivity : AppCompatActivity() {
 
 
 
-        reg?.setOnClickListener {
+        reg.setOnClickListener {
             val intent = Intent(this, RegistrationScreen::class.java)
             if (hackathonData != null) {
                 intent.putExtra("Hackathonclickedid", hackathonData.HackathonId)

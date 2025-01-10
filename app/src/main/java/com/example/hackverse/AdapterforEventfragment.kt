@@ -8,20 +8,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AdapterforEventfragment(private val hackathonList : List<HackathonViewDataInEventRecycler>):
     RecyclerView.Adapter<AdapterforEventfragment.HackathonViewHolder>() {
 
-
-
-
-
-
     inner class HackathonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // Initialize the views from your CardView layout
+
+
         val titleTextView: TextView = itemView.findViewById(R.id.showtitle)
         val organisationTextView: TextView = itemView.findViewById(R.id.showorganisation)
         val startDateTextView: TextView = itemView.findViewById(R.id.showstartdate)
@@ -33,11 +28,7 @@ class AdapterforEventfragment(private val hackathonList : List<HackathonViewData
         val saveHackathonIcon: ImageView = itemView.findViewById(R.id.saveicon)
         val likeHackathonIcon: ImageView = itemView.findViewById(R.id.likeicon) // New like icon
 
-        //val hackathonImageView: ImageView = itemView.findViewById(R.id.hackathonImageView)
-
-
         init {
-            // Save Hackathon Icon Click
             saveHackathonIcon.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
@@ -45,8 +36,6 @@ class AdapterforEventfragment(private val hackathonList : List<HackathonViewData
                     saveHackathonToFirestore(selectedHackathon.HackathonId)
                 }
             }
-
-            // Like Hackathon Icon Click
             likeHackathonIcon.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
@@ -55,18 +44,13 @@ class AdapterforEventfragment(private val hackathonList : List<HackathonViewData
                 }
             }
 
-
-            // Set an OnClickListener on the itemView
             itemView.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val selectedHackathon = hackathonList[position]
 
-                    // Store the selected hackathon in the singleton
                     SelectedHackathon.hackathonData = selectedHackathon
-                    // Start a new activity with details
 
-                    // Navigate to the next activity
                     val context = itemView.context
                     val intent = Intent(context, HackathonDetailsActivity::class.java)
                     context.startActivity(intent)
@@ -89,7 +73,7 @@ class AdapterforEventfragment(private val hackathonList : List<HackathonViewData
                 userCollection.document(hackathonId).set(hackathonData)
                     .addOnSuccessListener {
                         Toast.makeText(
-                            itemView.context, // Access the context from RecyclerView
+                            itemView.context,
                             "Hackathon saved successfully!",
                             Toast.LENGTH_SHORT
                         ).show()
@@ -109,64 +93,85 @@ class AdapterforEventfragment(private val hackathonList : List<HackathonViewData
             val firestore = FirebaseFirestore.getInstance()
             val hackathonRef =
                 firestore.collection("AddedHackathonData").document(hackathon.HackathonId)
-
-            // Update like count in AddedHackathondata
-            hackathonRef.get().addOnSuccessListener { document ->
-                if (document.exists()) {
-                    val currentLikes = document.getLong("likeCount") ?: 0
-                    hackathonRef.update("likeCount", currentLikes + 1)
-                } else {
-                    hackathonRef.set(mapOf("likeCount" to 1))
-                }
-            }
-            // Save Liked Hackathon to Userdata
             val userId = FirebaseAuth.getInstance().currentUser?.uid
+
             if (userId != null) {
                 val likedHackathonsRef = firestore.collection("Userdata")
                     .document(userId)
                     .collection("Liked Hackathons")
 
-                val likedHackathonData = hashMapOf(
-                    "hackathonId" to hackathon.HackathonId,
-                    "hackathonTitle" to hackathon.HackathonTitle,
-                    "organisation" to hackathon.OrganisationName
-                )
+                // Check if the user has already liked the hackathon
+                likedHackathonsRef.document(hackathon.HackathonId).get()
+                    .addOnSuccessListener { document ->
+                        if (document.exists()) {
+                            // User has already liked this hackathon
+                            Toast.makeText(
+                                itemView.context,
+                                "You have already liked this hackathon",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            // User has not liked this hackathon yet, proceed to like
+                            hackathonRef.get().addOnSuccessListener { hackathonDoc ->
+                                if (hackathonDoc.exists()) {
+                                    val currentLikes = hackathonDoc.getLong("likeCount") ?: 0
+                                    hackathonRef.update("likeCount", currentLikes + 1)
+                                } else {
+                                    hackathonRef.set(mapOf("likeCount" to 1))
+                                }
 
-                likedHackathonsRef.document(hackathon.HackathonId).set(likedHackathonData)
-                    .addOnSuccessListener {
-                        Toast.makeText(
-                            itemView.context,
-                            "Hackathon UpVoted",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                                // Add the hackathon to the user's liked hackathons
+                                val likedHackathonData = hashMapOf(
+                                    "hackathonId" to hackathon.HackathonId,
+                                    "hackathonTitle" to hackathon.HackathonTitle,
+                                    "organisation" to hackathon.OrganisationName
+                                )
+
+                                likedHackathonsRef.document(hackathon.HackathonId)
+                                    .set(likedHackathonData)
+                                    .addOnSuccessListener {
+                                        Toast.makeText(
+                                            itemView.context,
+                                            "Hackathon UpVoted",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                    .addOnFailureListener {
+                                        Toast.makeText(
+                                            itemView.context,
+                                            "Failed to like hackathon",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                            }
+                        }
                     }
                     .addOnFailureListener {
                         Toast.makeText(
                             itemView.context,
-                            "Failed to like hackathon",
+                            "Failed to check like status",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-
-
+            } else {
+                Toast.makeText(itemView.context, "User not logged in", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HackathonViewHolder {
-        // Inflate the layout for each item in the RecyclerView
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.hackathonvieweventfragment, parent, false)
-        return HackathonViewHolder(view)
-    }
-
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HackathonViewHolder {
+            val view = LayoutInflater.from(parent.context)
+                .inflate(R.layout.hackathonvieweventfragment, parent, false)
+            return HackathonViewHolder(view)
+        }
 
 
         override fun onBindViewHolder(holder: HackathonViewHolder, position: Int) {
-            // Get the current HackathonData item
+
             val currentHackathon = hackathonList[position]
 
-            // Bind data to the views
+
             holder.titleTextView.text = currentHackathon.HackathonTitle
             holder.organisationTextView.text = currentHackathon.OrganisationName
             holder.modeTextView.text = currentHackathon.HackathonMode
@@ -176,18 +181,11 @@ class AdapterforEventfragment(private val hackathonList : List<HackathonViewData
             holder.startDateTextView.text = currentHackathon.HackathonStartDate.toString()
             holder.endDateTextView.text = currentHackathon.HackathonEndDate.toString()
 
-            //Glide.with(holder.itemView.context)
-              //  .load(currentHackathon.imageUrl)
-              //  .placeholder(R.drawable.placeholder) // Optional placeholder
-                //.error(R.drawable.error_image) // Optional error image
-                //.into(holder.hackathonImageView)
-
-
 
         }
-    override fun getItemCount(): Int {
-        return hackathonList.size // Return the size of the data list
+
+        override fun getItemCount(): Int {
+            return hackathonList.size
+        }
     }
 
-
-    }

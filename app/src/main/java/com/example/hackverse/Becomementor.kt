@@ -14,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class Becomementor : AppCompatActivity() {
+class   Becomementor : AppCompatActivity() {
 
 
     private lateinit var firestore: FirebaseFirestore

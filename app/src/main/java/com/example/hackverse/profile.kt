@@ -34,7 +34,7 @@ class profile() : Fragment() {
         dataStoreManager = DataStoreManager(requireContext())
         lifecycleScope.launch {
             dataStoreManager.getUserData().collect { userData ->
-                val (name, email,uid) = userData
+                val (name , email , uid) = userData
                 val nameinprofile = view.findViewById<TextView>(R.id.nameinprofile)
                 val nameinprofile2 = view.findViewById<TextView>(R.id.nameinprofile2)
                 val emailinprofile = view.findViewById<TextView>(R.id.emailinprofile)

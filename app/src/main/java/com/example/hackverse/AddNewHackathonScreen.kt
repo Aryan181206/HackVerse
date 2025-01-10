@@ -18,319 +18,180 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Calendar
 
-
 class AddNewHackathonScreen : AppCompatActivity() {
 
     var db: FirebaseFirestore = FirebaseFirestore.getInstance()
-
-
-    //date piker
-
     private lateinit var editTextStartDate: EditText
     private lateinit var editTextEndDate: EditText
+    private var startDateMillis: Long = 0L
 
-
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_add_new_hackathon_screen)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
+        setupSpinner(
+            R.id.spinnerteamsize,
+            arrayOf("Select Team Size", "1", "2", "3", "4", "5", "6")
+        )
 
-        // Get references to views
-        val spinnerTeamSize: Spinner = findViewById(R.id.spinnerteamsize)
+        setupSpinner(
+            R.id.spinnerMode,
+            arrayOf("Select Mode", "Online", "Offline")
+        )
 
-        //team size options
-        val teamSizes = arrayOf("Select Team Size", "1", "2", "3", "4", "5", "6")
-        val mode = arrayOf("Select Mode", "Online", "Offline")
+        setupSpinner(
+            R.id.spinnerReward,
+            arrayOf("Update Reward", "2000$", "1000$", "500$", "250$", "100$", "No Reward")
+        )
 
+        setupSpinner(
+            R.id.spinnertype,
+            arrayOf("Regestion Type", "Paid", "Free")
+        )
 
-        // Create an adapter to populate the spinner
-        val adapterforteamsize = ArrayAdapter(this, android.R.layout.simple_spinner_item, teamSizes)
-        adapterforteamsize.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerTeamSize.adapter = adapterforteamsize
+        editTextStartDate = findViewById(R.id.editTextStartDate)
+        editTextEndDate = findViewById(R.id.editTextEndDate)
 
-
-        // Handle item selection in spinner
-        spinnerTeamSize.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parentView: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long,
-            ) {
-                // Handle item selection if necessary
-            }
-
-
-            override fun onNothingSelected(parentView: AdapterView<*>?) {
-                // Handle if nothing is selected
-            }
-        }
-
-
-        // Set the button click listener
-
-        // Reference the Spinner by ID
-        val spinnerMode: Spinner = findViewById(R.id.spinnerMode)
-
-        // Define the array of modes
-        val modes = arrayOf("Select Mode", "Online", "Offline")
-
-        // Create an ArrayAdapter to bind the modes to the Spinner
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, modes)
-
-        // Set the dropdown layout style
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-        // Set the adapter to the Spinner
-        spinnerMode.adapter = adapter
-
-        // Set an OnItemSelectedListener to handle the selection event
-        spinnerMode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parentView: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long,
-            ) {
-                // Get the selected mode
-                val selectedMode = parentView?.getItemAtPosition(position).toString()
-
-                // Perform action based on selected mode
-                if (selectedMode != "Select Mode") {
-                    //Toast.makeText(this, "Selected Mode: $selectedMode", Toast.LENGTH_SHORT).show()
-                    // You can replace this with any action based on the selected mode
-                }
-            }
-
-            override fun onNothingSelected(parentView: AdapterView<*>?) {
-                // Handle the case when no item is selected
-            }
-        }
-
-
-        // spinnner reward
-
-        // Reference the Spinner by ID
-        val spinnerReward: Spinner = findViewById(R.id.spinnerReward)
-
-        // Define the array of modes
-        val reward = arrayOf("Update Reward", "2000$", "1000$", "500$", "250$", "100$", "No Reward")
-
-        // Create an ArrayAdapter to bind the modes to the Spinner
-        val adapterforReward = ArrayAdapter(this, android.R.layout.simple_spinner_item, reward)
-
-        // Set the dropdown layout style
-        adapterforReward.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-        // Set the adapter to the Spinner
-        spinnerReward.adapter = adapterforReward
-
-        // Set an OnItemSelectedListener to handle the selection event
-        spinnerReward.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parentView: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long,
-            ) {
-                // Get the selected mode
-                val selectedReward = parentView?.getItemAtPosition(position).toString()
-
-                // Perform action based on selected mode
-                if (selectedReward != "Update Reward") {
-                    //Toast.makeText(this, "Selected Mode: $selectedMode", Toast.LENGTH_SHORT).show()
-                    // You can replace this with any action based on the selected mode
-                }
-            }
-
-            override fun onNothingSelected(parentView: AdapterView<*>?) {
-                // Handle the case when no item is selected
-            }
-        }
-
-
-        // for type of hackathon paid or free
-
-        // Reference the Spinner by ID
-        val spinnertype: Spinner = findViewById(R.id.spinnertype)
-
-        // Define the array of modes
-        val type = arrayOf("Regestion Type", "Paid", "Free")
-
-        // Create an ArrayAdapter to bind the modes to the Spinner
-        val adapterfortype = ArrayAdapter(this, android.R.layout.simple_spinner_item, type)
-
-        // Set the dropdown layout style
-        adapterfortype.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-        // Set the adapter to the Spinner
-        spinnertype.adapter = adapterfortype
-
-        // Set an OnItemSelectedListener to handle the selection event
-        spinnertype.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parentView: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long,
-            ) {
-                // Get the selected mode
-                val selectedType = parentView?.getItemAtPosition(position).toString()
-
-                // Perform action based on selected mode
-                if (selectedType != "Update Reward") {
-                    //Toast.makeText(this, "Selected Mode: $selectedMode", Toast.LENGTH_SHORT).show()
-                    // You can replace this with any action based on the selected mode
-                }
-            }
-
-            override fun onNothingSelected(parentView: AdapterView<*>?) {
-                // Handle the case when no item is selected
-            }
-        }
-
-
-        // Get references to the EditText views
-        editTextStartDate = findViewById<EditText>(R.id.editTextStartDate)
-        editTextEndDate = findViewById<EditText>(R.id.editTextEndDate)
-
-        // Set OnClickListener for Start Date EditText
         editTextStartDate.setOnClickListener {
-            showDatePickerDialog(true) // true means it's for Start Date
+            showDatePickerDialog(true)
         }
 
-        // Set OnClickListener for End Date EditText
         editTextEndDate.setOnClickListener {
-            showDatePickerDialog(false) // false means it's for End Date
+            showDatePickerDialog(false)
         }
 
-
-        // collecting the all data of added hackathon in a arrary list
-
-        // Inside your onCreate method
         val btn = findViewById<Button>(R.id.addhakathondata)
-        btn.setOnClickListener {
-            // Get the selected data only when the user clicks the button
-            val HackathonTitle = findViewById<EditText>(R.id.HackathonTitle)
-            val OrganisationName = findViewById<EditText>(R.id.Organisation)
-            val teamSize = spinnerTeamSize.selectedItem.toString()
-            val HackathonMode = spinnerMode.selectedItem.toString()
-            val HackathonReward = spinnerReward.selectedItem.toString()
-            val HackathonType = spinnertype.selectedItem.toString()
-            val HackathonstartDate = editTextStartDate.text.toString()
-            val HackathonendDate = editTextEndDate.text.toString()
-            val Hackathondescription = findViewById<EditText>(R.id.description)
-
-            // Simple validation for missing data
-            if (HackathonTitle.text.isEmpty() || OrganisationName.text.isEmpty() || teamSize == "Select Team Size" ||
-                HackathonMode == "Select Mode" || HackathonReward == "Update Reward" || HackathonType == "Regestion Type" ||
-                HackathonstartDate.isEmpty() || HackathonendDate.isEmpty()
-            ) {
-                Toast.makeText(this, "Please provide all the details", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-
-            // Convert the date to a Firestore Timestamp (optional, if you want to store the date in Timestamp format)
-            val calendar = Calendar.getInstance()
-            val startDateParts = HackathonstartDate.split("/")
-            val endDateParts = HackathonendDate.split("/")
-            val startCalendar = Calendar.getInstance()
-            val endCalendar = Calendar.getInstance()
-
-            startCalendar.set(
-                startDateParts[2].toInt(),
-                startDateParts[1].toInt() - 1,
-                startDateParts[0].toInt()
-            )
-            endCalendar.set(
-                endDateParts[2].toInt(),
-                endDateParts[1].toInt() - 1,
-                endDateParts[0].toInt()
-            )
-
-            val HackathonData = hashMapOf(
-                "HackathonTitle" to HackathonTitle.text.toString(),
-                "OrganisationName" to OrganisationName.text.toString(),
-                "TeamSize" to teamSize,
-                "HackathonMode" to HackathonMode,
-                "HackathonReward" to HackathonReward,
-                "HackathonType" to HackathonType,
-                "HackathonStartDate" to startCalendar.time, // Store as a Date object
-                "HackathonEndDate" to endCalendar.time,     // Store as a Date object
-                "HackathonDescription" to Hackathondescription.text.toString()
-            )
-
-            // Fetch all documents to determine the next ID
-            db.collection("AddedHackathonData")
-                .get()
-                .addOnSuccessListener { documents ->
-                    val nextDocId =
-                        "Hackathon${documents.size() + 1}" // Increment based on the current size
-
-                    // Add data with the custom document ID
-                    db.collection("AddedHackathonData").document(nextDocId)
-                        .set(HackathonData)
-                        .addOnSuccessListener {
-                            Toast.makeText(
-                                this,
-                                "Hackathon added successfully with ID: $nextDocId",
-                                Toast.LENGTH_SHORT
-                            ).show()
-
-                            // Navigate to the next screen
-                            val intent = Intent(this, MainScreen1::class.java)
-                            startActivity(intent)
-                        }
-                        .addOnFailureListener { exception ->
-                            Toast.makeText(
-                                this,
-                                "Some error occurred: ${exception.message}",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                }
-                .addOnFailureListener { exception ->
-                    Toast.makeText(
-                        this,
-                        "Error fetching documents: ${exception.message}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-        }
+        btn.setOnClickListener { addHackathonData() }
     }
 
+    private fun setupSpinner(spinnerId: Int, items: Array<String>) {
+        val spinner: Spinner = findViewById(spinnerId)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+    }
 
-        private fun showDatePickerDialog(isStartDate: Boolean) {
-            val calendar = Calendar.getInstance()
+    private fun showDatePickerDialog(isStartDate: Boolean) {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-            val year = calendar.get(Calendar.YEAR)
-            val month = calendar.get(Calendar.MONTH)
-            val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val datePickerDialog = DatePickerDialog(
+            this, { _, selectedYear, selectedMonth, selectedDay ->
+                val selectedCalendar = Calendar.getInstance()
+                selectedCalendar.set(selectedYear, selectedMonth, selectedDay)
+                val formattedDate = String.format(
+                    "%02d/%02d/%d", selectedDay, selectedMonth + 1, selectedYear
+                )
 
-            val datePickerDialog = DatePickerDialog(
-                this, { _, selectedYear, selectedMonth, selectedDay ->
-                    // Format the selected date in dd/MM/yyyy format
-                    val formattedDate =
-                        String.format("%02d/%02d/%d", selectedDay, selectedMonth + 1, selectedYear)
-
-                    // Set the selected date to the respective EditText
-                    if (isStartDate) {
+                if (isStartDate) {
+                    if (selectedCalendar.timeInMillis < calendar.timeInMillis) {
+                        Toast.makeText(this, "Start date must be today or later", Toast.LENGTH_SHORT).show()
+                    } else {
                         editTextStartDate.setText(formattedDate)
+                        startDateMillis = selectedCalendar.timeInMillis
+                    }
+                } else {
+                    if (startDateMillis == 0L) {
+                        Toast.makeText(this, "Please select the start date first", Toast.LENGTH_SHORT).show()
+                    } else if (selectedCalendar.timeInMillis < startDateMillis) {
+                        Toast.makeText(this, "End date must be after the start date", Toast.LENGTH_SHORT).show()
                     } else {
                         editTextEndDate.setText(formattedDate)
                     }
-                },
-                year, month, day
-            )
+                }
+            },
+            year, month, day
+        )
 
-            datePickerDialog.show()
-        }
+        datePickerDialog.show()
     }
+
+
+    private fun addHackathonData() {
+        val hackathonTitle = findViewById<EditText>(R.id.HackathonTitle)
+        val organisationName = findViewById<EditText>(R.id.Organisation)
+        val teamSize = findViewById<Spinner>(R.id.spinnerteamsize).selectedItem.toString()
+        val hackathonMode = findViewById<Spinner>(R.id.spinnerMode).selectedItem.toString()
+        val hackathonReward = findViewById<Spinner>(R.id.spinnerReward).selectedItem.toString()
+        val hackathonType = findViewById<Spinner>(R.id.spinnertype).selectedItem.toString()
+        val hackathonStartDate = editTextStartDate.text.toString()
+        val hackathonEndDate = editTextEndDate.text.toString()
+        val hackathonDescription = findViewById<EditText>(R.id.description)
+
+        if (hackathonTitle.text.isEmpty() || organisationName.text.isEmpty() ||
+            teamSize == "Select Team Size" || hackathonMode == "Select Mode" ||
+            hackathonReward == "Update Reward" || hackathonType == "Regestion Type" ||
+            hackathonStartDate.isEmpty() || hackathonEndDate.isEmpty()
+        ) {
+            Toast.makeText(this, "Please provide all the details", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val startDateParts = hackathonStartDate.split("/")
+        val endDateParts = hackathonEndDate.split("/")
+        val startCalendar = Calendar.getInstance()
+        val endCalendar = Calendar.getInstance()
+
+        startCalendar.set(
+            startDateParts[2].toInt(),
+            startDateParts[1].toInt() - 1,
+            startDateParts[0].toInt()
+        )
+        endCalendar.set(
+            endDateParts[2].toInt(),
+            endDateParts[1].toInt() - 1,
+            endDateParts[0].toInt()
+        )
+
+        val hackathonData = hashMapOf(
+            "HackathonTitle" to hackathonTitle.text.toString(),
+            "OrganisationName" to organisationName.text.toString(),
+            "TeamSize" to teamSize,
+            "HackathonMode" to hackathonMode,
+            "HackathonReward" to hackathonReward,
+            "HackathonType" to hackathonType,
+            "HackathonStartDate" to startCalendar.time,
+            "HackathonEndDate" to endCalendar.time,
+            "HackathonDescription" to hackathonDescription.text.toString()
+        )
+
+        db.collection("AddedHackathonData")
+            .get()
+            .addOnSuccessListener { documents ->
+                val nextDocId = "Hackathon${documents.size() + 1}"
+                db.collection("AddedHackathonData").document(nextDocId)
+                    .set(hackathonData)
+                    .addOnSuccessListener {
+                        Toast.makeText(
+                            this,
+                            "Hackathon added successfully with ID: $nextDocId",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        startActivity(Intent(this, MainScreen1::class.java))
+                    }
+                    .addOnFailureListener { exception ->
+                        Toast.makeText(
+                            this,
+                            "Some error occurred: ${exception.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(
+                    this,
+                    "Error fetching documents: ${exception.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+    }
+}

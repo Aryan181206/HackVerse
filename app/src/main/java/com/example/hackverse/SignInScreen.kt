@@ -54,6 +54,8 @@ class SignInScreen : AppCompatActivity() {
         val userPass = findViewById<TextInputEditText>(R.id.userPassEditText)
         val googleSignInButton = findViewById<Button>(R.id.googlebtn)
         val forgotPasswordText = findViewById<TextView>(R.id.forgotPasswordText)
+
+
         val dataStoreManager = DataStoreManager(this)
 
         // Sign-In button logic

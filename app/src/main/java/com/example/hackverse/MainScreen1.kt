@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class MainScreen1 : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId", "SuspiciousIndentation")
+    //@SuppressLint("MissingInflatedId", "SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

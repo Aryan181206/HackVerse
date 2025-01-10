@@ -94,6 +94,7 @@ class Mentorship : Fragment() {
         val filteredList = mentorList.filter { mentor ->
             mentor.name.contains(query, ignoreCase = true)
         }
+        //update the recyclerview adapter with filtered list
         mentorAdapter.updateMentorList(filteredList)
     }
 
