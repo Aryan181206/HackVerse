@@ -69,6 +69,7 @@ class savedHackathon : AppCompatActivity() {
                     val title = document.getString("HackathonTitle") ?: ""
                     val organizer = document.getString("OrganisationName") ?: ""
 
+
                     val hackathon = savedHackathonData(title, organizer)
                     hackathonList.add(hackathon)
                     adapter.notifyDataSetChanged()

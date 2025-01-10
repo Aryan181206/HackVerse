@@ -29,17 +29,13 @@ class RegistrationScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration_screen)
 
-        // Initialize the DataStoreManager
+
         dataStoreManager = DataStoreManager(applicationContext)
 
-        // Retrieve data passed via intent
         val hackathonId = intent.getStringExtra("Hackathonclickedid")
 
-
-        // Get selected hackathon data
         val teamSize = SelectedHackathon.hackathonData?.TeamSize?.toIntOrNull() ?: 0
 
-        // Launch a coroutine to retrieve data from DataStore
         lifecycleScope.launch {
             dataStoreManager.getUserData().collect { userData ->
                 val (name, email, uid) = userData
@@ -49,9 +45,9 @@ class RegistrationScreen : AppCompatActivity() {
                     .addOnCompleteListener() { task ->
                         if (task.isSuccessful) {
 
-                            val documentSnapshots = task.result // Get the QuerySnapshot result
+                            val documentSnapshots = task.result
                             if (documentSnapshots != null) {
-                                for (i in documentSnapshots) { // Iterate over the list of DocumentSnapshots
+                                for (i in documentSnapshots) {
 
                                     val friendname = i.getString("name") ?: ""
                                     val friendemail = i.getString("email") ?: ""
@@ -67,10 +63,9 @@ class RegistrationScreen : AppCompatActivity() {
 
 
                 val btnregsiter = findViewById<Button>(R.id.regsiter)
-                // Spinner container
+
                 val spinnerContainer: LinearLayout = findViewById(R.id.registerspinner)
 
-                // Populate spinners dynamically based on team size
                 for (i in 0 until teamSize - 1) {
                     val spinner = Spinner(this@RegistrationScreen)
                     val adapter = ArrayAdapter(
@@ -81,30 +76,36 @@ class RegistrationScreen : AppCompatActivity() {
                     adapter.setDropDownViewResource(android.R.layout.select_dialog_item)
                     spinner.adapter = adapter
 
-                    // Add spinner to the container
                     spinnerContainer.addView(spinner)
                 }
                 btnregsiter.setOnClickListener {
-                    //created a lostto hold the selected members details
                     val selectedMembers = mutableListOf<Map<String, String>>()
-                    // Loop through each spinner to get the selected names
+                    val selectedNames = mutableSetOf<String>()
+
 
                     for (i in 0 until teamSize - 1) {
                         val spinner = spinnerContainer.getChildAt(i) as Spinner
                         val selectedName = spinner.selectedItem.toString()
+
+                        if (selectedName in selectedNames) {
+                            Toast.makeText(
+                                this@RegistrationScreen,
+                                "Each team member must be unique. Duplicate: $selectedName",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            return@setOnClickListener
+                        }
+
+                        selectedNames.add(selectedName)
                         val selectedEmail = teamMemberEmail[teamMemberName.indexOf(selectedName)]
 
-
-                        // Add the name and email to the selected members list
                         selectedMembers.add(mapOf("name" to selectedName, "email" to selectedEmail))
                     }
 
-
                     selectedMembers.add(0, mapOf("name" to name, "email" to email))
-                    // Store the selected names and emails in Firestore
-                    val teamData = mapOf("teamMembers" to selectedMembers)
 
-                    // Add team data to "RegisteredTeams" in the selected hackathon
+                     val teamData = mapOf("teamMembers" to selectedMembers)
+
                     db.collection("AddedHackathonData")
                         .document("$hackathonId")
                         .collection("RegisteredTeams")
@@ -112,16 +113,12 @@ class RegistrationScreen : AppCompatActivity() {
                         .addOnSuccessListener {
                             Toast.makeText(
                                 this@RegistrationScreen,
-                                "Registration Successful ! Please Give feedback",
+                                "Registration Successful! Please Give feedback.",
                                 Toast.LENGTH_SHORT
                             ).show()
-                            // Update the registration count of the selected hackathon
                             db.collection("AddedHackathonData")
                                 .document("$hackathonId")
-                                .update(
-                                    "registrationCount",
-                                    FieldValue.increment(teamSize.toLong())
-                                )
+                                .update("registrationCount", FieldValue.increment(teamSize.toLong()))
                                 .addOnSuccessListener {
                                     Toast.makeText(
                                         this@RegistrationScreen,
@@ -137,10 +134,9 @@ class RegistrationScreen : AppCompatActivity() {
                                     ).show()
                                 }
 
-                            // Registration successful, show a congratulatory dialog
                             showCongratulationsDialog()
-
-                        }.addOnFailureListener {
+                        }
+                        .addOnFailureListener {
                             Toast.makeText(
                                 this@RegistrationScreen,
                                 "Registration Failed. Please try again.",
@@ -148,15 +144,11 @@ class RegistrationScreen : AppCompatActivity() {
                             ).show()
                         }
 
-
-                    // Add the hackathon details to the current user's "Participated Hackathon"
                     db.collection("Userdata")
                         .document("$uid")
                         .collection("Participated Hackathon")
                         .document(hackathonId ?: "")
                         .set(mapOf("hackathonId" to hackathonId))
-
-                    // Add the hackathon details to each selected team member's "Participated Hackathon"
 
                     for (member in selectedMembers) {
                         val memberEmail = member["email"] ?: ""
@@ -183,6 +175,7 @@ class RegistrationScreen : AppCompatActivity() {
                             }
                     }
                 }
+
             }
         }
     }
@@ -193,17 +186,14 @@ class RegistrationScreen : AppCompatActivity() {
             .setMessage("You have successfully registered for the hackathon.")
             .setCancelable(false)
             .setPositiveButton("Give Feedback") { dialog, id ->
-                // Navigate to the feedback screen when "Give Feedback" is clicked
                 val intent = Intent(this@RegistrationScreen, feedbackscreen::class.java)
                 startActivity(intent)
             }
             .setNegativeButton("Close") { dialog, id ->
-                // Close the dialog
                 dialog.dismiss()
                 startActivity(Intent(this@RegistrationScreen, MainScreen1::class.java))
             }
 
-        // Create the AlertDialog and show it
         val alert = dialogBuilder.create()
         alert.show()
     }
