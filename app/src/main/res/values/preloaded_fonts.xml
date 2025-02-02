@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/abril_fatface</item>
+        <item>@font/acme</item>
+        <item>@font/agbalumo</item>
+        <item>@font/akaya_telivigala</item>
+        <item>@font/alatsi</item>
+        <item>@font/faster_one</item>
+        <item>@font/fondamento</item>
+    </array>
+</resources>
